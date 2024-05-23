@@ -123,6 +123,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				entity: entity,
 				selectedMainEntityId: entity.Id,
 				optionsCompany: $scope.optionsCompany,
+				optionsType: $scope.optionsType,
 			});
 		};
 
@@ -133,6 +134,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.postMessage("createEntity", {
 				entity: {},
 				optionsCompany: $scope.optionsCompany,
+				optionsType: $scope.optionsType,
 			});
 		};
 
@@ -141,6 +143,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.postMessage("updateEntity", {
 				entity: $scope.selectedEntity,
 				optionsCompany: $scope.optionsCompany,
+				optionsType: $scope.optionsType,
 			});
 		};
 
@@ -178,11 +181,13 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Contract-filter", {
 				entity: $scope.filterEntity,
 				optionsCompany: $scope.optionsCompany,
+				optionsType: $scope.optionsType,
 			});
 		};
 
 		//----------------Dropdowns-----------------//
 		$scope.optionsCompany = [];
+		$scope.optionsType = [];
 
 
 		$http.get("/services/ts/codbex-companies/gen/api/Companies/CompanyService.ts").then(function (response) {
@@ -194,10 +199,27 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
+		$http.get("/services/ts/codbex-contracts/gen/api/Settings/ContractTypeService.ts").then(function (response) {
+			$scope.optionsType = response.data.map(e => {
+				return {
+					value: e.Id,
+					text: e.Name
+				}
+			});
+		});
+
 		$scope.optionsCompanyValue = function (optionKey) {
 			for (let i = 0; i < $scope.optionsCompany.length; i++) {
 				if ($scope.optionsCompany[i].value === optionKey) {
 					return $scope.optionsCompany[i].text;
+				}
+			}
+			return null;
+		};
+		$scope.optionsTypeValue = function (optionKey) {
+			for (let i = 0; i < $scope.optionsType.length; i++) {
+				if ($scope.optionsType[i].value === optionKey) {
+					return $scope.optionsType[i].text;
 				}
 			}
 			return null;
