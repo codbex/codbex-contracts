@@ -1,0 +1,15 @@
+{
+  "files": [
+    {
+      "table": "CODBEX_CONTRACTTYPE",
+      "schema": "PUBLIC",
+      "file": "/codbex-contracts-data/contract-types.csv",
+      "header": true,
+      "useHeaderNames": true,
+      "delimField": ",",
+      "delimEnclosing": "\"",
+      "distinguishEmptyFromNull": true,
+      "version": "1.0"
+    }
+  ]
+}

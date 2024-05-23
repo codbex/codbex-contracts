@@ -1,4 +1,4 @@
-CONTRACTTYPE_ID,CONTRACTTYPE_STATUS
+CONTRACTTYPE_ID,CONTRACTTYPE_NAME
 1,Fixed-Price Contracts
 2,Firm Fixed-Price (FFP)
 3,Fixed-Price with Economic Price Adjustment (FP-EPA)
