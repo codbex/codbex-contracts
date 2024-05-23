@@ -1,0 +1,23 @@
+CONTRACTTYPE_ID,CONTRACTTYPE_STATUS
+1,Fixed-Price Contracts
+2,Firm Fixed-Price (FFP)
+3,Fixed-Price with Economic Price Adjustment (FP-EPA)
+4,Cost-Reimbursement Contracts
+5,Cost Plus Fixed Fee (CPFF)
+6,Cost Plus Incentive Fee (CPIF)
+7,Cost Plus Award Fee (CPAF)
+8,Time and Materials Contracts (T&M)
+9,Unit Price Contracts
+10,Bilateral Contracts
+11,Unilateral Contracts
+12,Implied Contracts
+13,Express Contracts
+14,Joint Venture Agreements
+15,Partnership Agreements
+16,Employment Contracts
+17,Lease Agreements
+18,Sales Contracts
+19,Service Contracts
+20,Non-Disclosure Agreements (NDAs)
+21,Indemnity Contracts
+22,Franchise Agreements
