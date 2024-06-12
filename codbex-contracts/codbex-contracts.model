@@ -34,7 +34,7 @@
                         "dataType": "VARCHAR",
                         "dataUnique": "false",
                         "isCalculatedProperty": "true",
-                        "isRequiredProperty": "",
+                        "isRequiredProperty": "false",
                         "name": "Number",
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
