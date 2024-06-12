@@ -89,7 +89,7 @@
           "inputRule": ""
         },
         {
-          "calculatedPropertyExpressionCreate": "",
+          "calculatedPropertyExpressionCreate": "new NumberGeneratorService().generate(25)",
           "calculatedPropertyExpressionUpdate": "",
           "dataAutoIncrement": false,
           "dataLength": "20",
@@ -100,8 +100,8 @@
           "dataScale": "NaN",
           "dataType": "VARCHAR",
           "dataUnique": false,
-          "isCalculatedProperty": false,
-          "isRequiredProperty": true,
+          "isCalculatedProperty": true,
+          "isRequiredProperty": false,
           "name": "Number",
           "widgetIsMajor": true,
           "widgetLength": "20",
@@ -299,6 +299,7 @@
       "feedUsername": "YWRtaW4=",
       "generateReport": "false",
       "icon": "/services/web/resources/unicons/file.svg",
+      "importsCode": "import { NumberGeneratorService } from \"/codbex-number-generator/service/generator\";",
       "layoutType": "MANAGE_MASTER",
       "menuIndex": "100",
       "menuKey": "contract",
@@ -326,7 +327,7 @@
       "primaryKeysString": "Id",
       "masterProperties": {
         "title": {
-          "calculatedPropertyExpressionCreate": "",
+          "calculatedPropertyExpressionCreate": "new NumberGeneratorService().generate(25)",
           "calculatedPropertyExpressionUpdate": "",
           "dataAutoIncrement": false,
           "dataLength": "20",
@@ -337,8 +338,8 @@
           "dataScale": "NaN",
           "dataType": "VARCHAR",
           "dataUnique": false,
-          "isCalculatedProperty": false,
-          "isRequiredProperty": true,
+          "isCalculatedProperty": true,
+          "isRequiredProperty": false,
           "name": "Number",
           "widgetIsMajor": true,
           "widgetLength": "20",

@@ -3,6 +3,8 @@ import { Extensions } from "sdk/extensions"
 import { ContractRepository, ContractEntityOptions } from "../../dao/Contract/ContractRepository";
 import { ValidationError } from "../utils/ValidationError";
 import { HttpUtils } from "../utils/HttpUtils";
+// custom imports
+import { NumberGeneratorService } from "/codbex-number-generator/service/generator";
 
 const validationModules = await Extensions.loadExtensionModules("codbex-contracts-Contract-Contract", ["validate"]);
 
@@ -119,9 +121,6 @@ class ContractService {
     }
 
     private validateEntity(entity: any): void {
-        if (entity.Number === null || entity.Number === undefined) {
-            throw new ValidationError(`The 'Number' property is required, provide a valid value`);
-        }
         if (entity.Number?.length > 20) {
             throw new ValidationError(`The 'Number' exceeds the maximum length of [20] characters`);
         }

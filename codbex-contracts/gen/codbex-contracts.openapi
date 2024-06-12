@@ -825,7 +825,6 @@ components:
     Contract:
       type: object
       required:
-        - Number
         - StartDate
         - EndDate
         - Company
@@ -838,6 +837,7 @@ components:
           type: string
           minLength: 0
           maxLength: 20
+          readOnly: true
         StartDate:
         EndDate:
         Company:

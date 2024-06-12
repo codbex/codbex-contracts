@@ -3,6 +3,8 @@ import { producer } from "sdk/messaging";
 import { extensions } from "sdk/extensions";
 import { dao as daoApi } from "sdk/db";
 import { EntityUtils } from "../utils/EntityUtils";
+// custom imports
+import { NumberGeneratorService } from "/codbex-number-generator/service/generator";
 
 export interface ContractEntity {
     readonly Id: number;
@@ -16,7 +18,6 @@ export interface ContractEntity {
 }
 
 export interface ContractCreateEntity {
-    readonly Number?: string;
     readonly StartDate?: Date;
     readonly EndDate?: Date;
     readonly Company?: number;
@@ -198,6 +199,8 @@ export class ContractRepository {
     public create(entity: ContractCreateEntity): number {
         EntityUtils.setLocalDate(entity, "StartDate");
         EntityUtils.setLocalDate(entity, "EndDate");
+        // @ts-ignore
+        (entity as ContractEntity).Number = new NumberGeneratorService().generate(25);
         const id = this.dao.insert(entity);
         this.triggerEvent({
             operation: "create",

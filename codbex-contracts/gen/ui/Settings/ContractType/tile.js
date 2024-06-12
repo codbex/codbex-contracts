@@ -5,11 +5,13 @@
  */
 exports.getTile = function () {
     return {
-        group: "Settings",
+        group: "codbex-contracts",
         name: "ContractType",
         caption: "Manage entity ContractType",
         tooltip: "ContractType",
-        // icon: "file-o",
+        type: "SETTING",
+        report: "false",
+        icon: "/services/web/resources/unicons/file.svg",
         location: "/services/web/codbex-contracts/gen/ui/Settings/index.html",
         order: "100",
         groupOrder: "999",
