@@ -1,0 +1,95 @@
+{
+    "schema": {
+        "structures": [
+            {
+                "name": "CODBEX_CONTRACT",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "CONTRACT_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "CONTRACT_NUMBER"
+                    },
+                    {
+                        "type": "DATE",
+                        "nullable": true,
+                        "name": "CONTRACT_STARTDATE"
+                    },
+                    {
+                        "type": "DATE",
+                        "nullable": true,
+                        "name": "CONTRACT_ENDDATE"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "CONTRACT_COMPANY"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 500,
+                        "nullable": true,
+                        "name": "CONTRACT_URL"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "CONTRACT_TYPE"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 1000,
+                        "nullable": true,
+                        "name": "CONTRACT_COMMENT"
+                    }
+                ]
+            },
+            {
+                "name": "CODBEX_CONTRACTTYPE",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "CONTRACTTYPE_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 100,
+                        "nullable": true,
+                        "name": "CONTRACTTYPE_NAME"
+                    }
+                ]
+            },
+            {
+                "name": "Contract_Company",
+                "type": "foreignKey",
+                "table": "CODBEX_CONTRACT",
+                "constraintName": "Contract_Company",
+                "columns": "CONTRACT_COMPANY",
+                "referencedTable": "CODBEX_COMPANY",
+                "referencedColumns": "COMPANY_ID"
+            },
+            {
+                "name": "Contract_ContractType",
+                "type": "foreignKey",
+                "table": "CODBEX_CONTRACT",
+                "constraintName": "Contract_ContractType",
+                "columns": "CONTRACT_TYPE",
+                "referencedTable": "CODBEX_CONTRACTTYPE",
+                "referencedColumns": "CONTRACTTYPE_ID"
+            }
+        ]
+    },
+    "datasource": "DefaultDB"
+}
