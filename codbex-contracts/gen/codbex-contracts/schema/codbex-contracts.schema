@@ -7,7 +7,6 @@
                 "columns": [
                     {
                         "type": "INTEGER",
-                        "length": 0,
                         "primaryKey": true,
                         "identity": true,
                         "nullable": true,
@@ -21,19 +20,16 @@
                     },
                     {
                         "type": "DATE",
-                        "length": 20,
                         "nullable": true,
                         "name": "CONTRACT_STARTDATE"
                     },
                     {
                         "type": "DATE",
-                        "length": 20,
                         "nullable": true,
                         "name": "CONTRACT_ENDDATE"
                     },
                     {
                         "type": "INTEGER",
-                        "length": 0,
                         "nullable": true,
                         "name": "CONTRACT_COMPANY"
                     },
@@ -45,7 +41,6 @@
                     },
                     {
                         "type": "INTEGER",
-                        "length": 0,
                         "nullable": true,
                         "name": "CONTRACT_TYPE"
                     },
@@ -63,7 +58,6 @@
                 "columns": [
                     {
                         "type": "INTEGER",
-                        "length": 0,
                         "primaryKey": true,
                         "identity": true,
                         "nullable": true,
