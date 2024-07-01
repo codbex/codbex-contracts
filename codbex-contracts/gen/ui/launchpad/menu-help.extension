@@ -1,5 +1,0 @@
-{
-    "module": "codbex-contracts/gen/ui/launchpad/menu-help.js",
-    "extensionPoint": "codbex-contracts-menu",
-    "description": "codbex-contracts - Application Menu"
-}
