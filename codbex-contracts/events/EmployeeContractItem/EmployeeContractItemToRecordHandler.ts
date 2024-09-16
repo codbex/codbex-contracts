@@ -11,18 +11,20 @@ export const trigger = (event) => {
 
         const medicalCertificate = {
             "Name": "Medical Certificate",
-            "Contract": contractItem.Id
+            "EmployeeContract": contractItem.Id
         }
 
         const bankAccountDetails = {
             "Name": "Bank Account Details",
-            "Contract": contractItem.Id
+            "EmployeeContract": contractItem.Id
         }
 
         const criminalRecordCerificate = {
             "Name": "Criminal Record Cerificate",
-            "Contract": contractItem.Id
+            "EmployeeContract": contractItem.Id
         }
+
+        console.log("here");
 
         EmployeeContractItemDao.create(medicalCertificate);
         EmployeeContractItemDao.create(bankAccountDetails);

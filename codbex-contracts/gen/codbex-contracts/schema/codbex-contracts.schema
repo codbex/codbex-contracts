@@ -72,36 +72,6 @@
                 ]
             },
             {
-                "name": "CODBEX_CONTRACTITEM",
-                "type": "TABLE",
-                "columns": [
-                    {
-                        "type": "INTEGER",
-                        "primaryKey": true,
-                        "identity": true,
-                        "nullable": true,
-                        "name": "CONTRACTITEM_ID"
-                    },
-                    {
-                        "type": "VARCHAR",
-                        "length": 100,
-                        "nullable": true,
-                        "name": "CONTRACTITEM_NAME"
-                    },
-                    {
-                        "type": "VARCHAR",
-                        "length": 500,
-                        "nullable": true,
-                        "name": "CONTRACTITEM_URL"
-                    },
-                    {
-                        "type": "INTEGER",
-                        "nullable": true,
-                        "name": "CONTRACTITEM_EMPLOYEECONTRACT"
-                    }
-                ]
-            },
-            {
                 "name": "CODBEX_EMPLOYEECONTRACT",
                 "type": "TABLE",
                 "columns": [
@@ -158,6 +128,36 @@
                 ]
             },
             {
+                "name": "CODBEX_EMPLOYEECONTRACTITEM",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACTITEM_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 100,
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACTITEM_NAME"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 500,
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACTITEM_DOCUMENT"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACTITEM_EMPLOYEECONTRACT"
+                    }
+                ]
+            },
+            {
                 "name": "Contract_Company",
                 "type": "foreignKey",
                 "table": "CODBEX_CONTRACT",
@@ -174,15 +174,6 @@
                 "columns": "CONTRACT_TYPE",
                 "referencedTable": "CODBEX_CONTRACTTYPE",
                 "referencedColumns": "CONTRACTTYPE_ID"
-            },
-            {
-                "name": "EmployeeContractItem_EmployeeContract",
-                "type": "foreignKey",
-                "table": "CODBEX_CONTRACTITEM",
-                "constraintName": "EmployeeContractItem_EmployeeContract",
-                "columns": "CONTRACTITEM_EMPLOYEECONTRACT",
-                "referencedTable": "CODBEX_EMPLOYEECONTRACT",
-                "referencedColumns": "EMPLOYEECONTRACT_ID"
             },
             {
                 "name": "EmployeeContract_Company",
@@ -210,6 +201,15 @@
                 "columns": "EMPLOYEECONTRACT_TYPE",
                 "referencedTable": "CODBEX_CONTRACTTYPE",
                 "referencedColumns": "CONTRACTTYPE_ID"
+            },
+            {
+                "name": "EmployeeContractItem_EmployeeContract",
+                "type": "foreignKey",
+                "table": "CODBEX_EMPLOYEECONTRACTITEM",
+                "constraintName": "EmployeeContractItem_EmployeeContract",
+                "columns": "EMPLOYEECONTRACTITEM_EMPLOYEECONTRACT",
+                "referencedTable": "CODBEX_EMPLOYEECONTRACT",
+                "referencedColumns": "EMPLOYEECONTRACT_ID"
             }
         ]
     },

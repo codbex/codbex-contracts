@@ -90,28 +90,28 @@ interface EmployeeContractItemUpdateEntityEvent extends EmployeeContractItemEnti
 export class EmployeeContractItemRepository {
 
     private static readonly DEFINITION = {
-        table: "CODBEX_CONTRACTITEM",
+        table: "CODBEX_EMPLOYEECONTRACTITEM",
         properties: [
             {
                 name: "Id",
-                column: "CONTRACTITEM_ID",
+                column: "EMPLOYEECONTRACTITEM_ID",
                 type: "INTEGER",
                 id: true,
                 autoIncrement: true,
             },
             {
                 name: "Name",
-                column: "CONTRACTITEM_NAME",
+                column: "EMPLOYEECONTRACTITEM_NAME",
                 type: "VARCHAR",
             },
             {
                 name: "Document",
-                column: "CONTRACTITEM_URL",
+                column: "EMPLOYEECONTRACTITEM_DOCUMENT",
                 type: "VARCHAR",
             },
             {
                 name: "EmployeeContract",
-                column: "CONTRACTITEM_EMPLOYEECONTRACT",
+                column: "EMPLOYEECONTRACTITEM_EMPLOYEECONTRACT",
                 type: "INTEGER",
             }
         ]
@@ -136,11 +136,11 @@ export class EmployeeContractItemRepository {
         const id = this.dao.insert(entity);
         this.triggerEvent({
             operation: "create",
-            table: "CODBEX_CONTRACTITEM",
+            table: "CODBEX_EMPLOYEECONTRACTITEM",
             entity: entity,
             key: {
                 name: "Id",
-                column: "CONTRACTITEM_ID",
+                column: "EMPLOYEECONTRACTITEM_ID",
                 value: id
             }
         });
@@ -152,12 +152,12 @@ export class EmployeeContractItemRepository {
         this.dao.update(entity);
         this.triggerEvent({
             operation: "update",
-            table: "CODBEX_CONTRACTITEM",
+            table: "CODBEX_EMPLOYEECONTRACTITEM",
             entity: entity,
             previousEntity: previousEntity,
             key: {
                 name: "Id",
-                column: "CONTRACTITEM_ID",
+                column: "EMPLOYEECONTRACTITEM_ID",
                 value: entity.Id
             }
         });
@@ -183,11 +183,11 @@ export class EmployeeContractItemRepository {
         this.dao.remove(id);
         this.triggerEvent({
             operation: "delete",
-            table: "CODBEX_CONTRACTITEM",
+            table: "CODBEX_EMPLOYEECONTRACTITEM",
             entity: entity,
             key: {
                 name: "Id",
-                column: "CONTRACTITEM_ID",
+                column: "EMPLOYEECONTRACTITEM_ID",
                 value: id
             }
         });
@@ -198,7 +198,7 @@ export class EmployeeContractItemRepository {
     }
 
     public customDataCount(): number {
-        const resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CODBEX_CONTRACTITEM"');
+        const resultSet = query.execute('SELECT COUNT(*) AS COUNT FROM "CODBEX_EMPLOYEECONTRACTITEM"');
         if (resultSet !== null && resultSet[0] !== null) {
             if (resultSet[0].COUNT !== undefined && resultSet[0].COUNT !== null) {
                 return resultSet[0].COUNT;
