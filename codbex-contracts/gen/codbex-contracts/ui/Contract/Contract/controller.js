@@ -123,6 +123,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				entity: entity,
 				selectedMainEntityId: entity.Id,
 				optionsCompany: $scope.optionsCompany,
+				optionsJobRole: $scope.optionsJobRole,
 				optionsType: $scope.optionsType,
 			});
 		};
@@ -134,6 +135,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.postMessage("createEntity", {
 				entity: {},
 				optionsCompany: $scope.optionsCompany,
+				optionsJobRole: $scope.optionsJobRole,
 				optionsType: $scope.optionsType,
 			});
 		};
@@ -143,6 +145,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.postMessage("updateEntity", {
 				entity: $scope.selectedEntity,
 				optionsCompany: $scope.optionsCompany,
+				optionsJobRole: $scope.optionsJobRole,
 				optionsType: $scope.optionsType,
 			});
 		};
@@ -181,17 +184,28 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.showDialogWindow("Contract-filter", {
 				entity: $scope.filterEntity,
 				optionsCompany: $scope.optionsCompany,
+				optionsJobRole: $scope.optionsJobRole,
 				optionsType: $scope.optionsType,
 			});
 		};
 
 		//----------------Dropdowns-----------------//
 		$scope.optionsCompany = [];
+		$scope.optionsJobRole = [];
 		$scope.optionsType = [];
 
 
 		$http.get("/services/ts/codbex-companies/gen/codbex-companies/api/Companies/CompanyService.ts").then(function (response) {
 			$scope.optionsCompany = response.data.map(e => {
+				return {
+					value: e.Id,
+					text: e.Name
+				}
+			});
+		});
+
+		$http.get("/services/ts/codbex-companies/gen/codbex-companies/api/Companies/JobRoleService.ts").then(function (response) {
+			$scope.optionsJobRole = response.data.map(e => {
 				return {
 					value: e.Id,
 					text: e.Name
@@ -212,6 +226,14 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			for (let i = 0; i < $scope.optionsCompany.length; i++) {
 				if ($scope.optionsCompany[i].value === optionKey) {
 					return $scope.optionsCompany[i].text;
+				}
+			}
+			return null;
+		};
+		$scope.optionsJobRoleValue = function (optionKey) {
+			for (let i = 0; i < $scope.optionsJobRole.length; i++) {
+				if ($scope.optionsJobRole[i].value === optionKey) {
+					return $scope.optionsJobRole[i].text;
 				}
 			}
 			return null;

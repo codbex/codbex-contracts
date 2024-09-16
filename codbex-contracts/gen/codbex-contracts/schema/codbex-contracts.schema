@@ -34,6 +34,11 @@
                         "name": "CONTRACT_COMPANY"
                     },
                     {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "CONTRACT_JOBROLE"
+                    },
+                    {
                         "type": "VARCHAR",
                         "length": 500,
                         "nullable": true,
@@ -79,6 +84,15 @@
                 "columns": "CONTRACT_COMPANY",
                 "referencedTable": "CODBEX_COMPANY",
                 "referencedColumns": "COMPANY_ID"
+            },
+            {
+                "name": "Contract_JobRole",
+                "type": "foreignKey",
+                "table": "CODBEX_CONTRACT",
+                "constraintName": "Contract_JobRole",
+                "columns": "CONTRACT_JOBROLE",
+                "referencedTable": "CODBEX_JOBROLE",
+                "referencedColumns": "COMPANYROLE_ID"
             },
             {
                 "name": "Contract_ContractType",

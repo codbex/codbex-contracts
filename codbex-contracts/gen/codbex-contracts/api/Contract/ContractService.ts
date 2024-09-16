@@ -133,6 +133,9 @@ class ContractService {
         if (entity.Company === null || entity.Company === undefined) {
             throw new ValidationError(`The 'Company' property is required, provide a valid value`);
         }
+        if (entity.JobRole === null || entity.JobRole === undefined) {
+            throw new ValidationError(`The 'JobRole' property is required, provide a valid value`);
+        }
         if (entity.Url === null || entity.Url === undefined) {
             throw new ValidationError(`The 'Url' property is required, provide a valid value`);
         }

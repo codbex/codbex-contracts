@@ -12,6 +12,7 @@ export interface ContractEntity {
     StartDate?: Date;
     EndDate?: Date;
     Company?: number;
+    JobRole?: number;
     Url?: string;
     Type?: number;
     Comment?: string;
@@ -21,6 +22,7 @@ export interface ContractCreateEntity {
     readonly StartDate?: Date;
     readonly EndDate?: Date;
     readonly Company?: number;
+    readonly JobRole?: number;
     readonly Url?: string;
     readonly Type?: number;
     readonly Comment?: string;
@@ -38,6 +40,7 @@ export interface ContractEntityOptions {
             StartDate?: Date | Date[];
             EndDate?: Date | Date[];
             Company?: number | number[];
+            JobRole?: number | number[];
             Url?: string | string[];
             Type?: number | number[];
             Comment?: string | string[];
@@ -48,6 +51,7 @@ export interface ContractEntityOptions {
             StartDate?: Date | Date[];
             EndDate?: Date | Date[];
             Company?: number | number[];
+            JobRole?: number | number[];
             Url?: string | string[];
             Type?: number | number[];
             Comment?: string | string[];
@@ -58,6 +62,7 @@ export interface ContractEntityOptions {
             StartDate?: Date;
             EndDate?: Date;
             Company?: number;
+            JobRole?: number;
             Url?: string;
             Type?: number;
             Comment?: string;
@@ -68,6 +73,7 @@ export interface ContractEntityOptions {
             StartDate?: Date;
             EndDate?: Date;
             Company?: number;
+            JobRole?: number;
             Url?: string;
             Type?: number;
             Comment?: string;
@@ -78,6 +84,7 @@ export interface ContractEntityOptions {
             StartDate?: Date;
             EndDate?: Date;
             Company?: number;
+            JobRole?: number;
             Url?: string;
             Type?: number;
             Comment?: string;
@@ -88,6 +95,7 @@ export interface ContractEntityOptions {
             StartDate?: Date;
             EndDate?: Date;
             Company?: number;
+            JobRole?: number;
             Url?: string;
             Type?: number;
             Comment?: string;
@@ -98,6 +106,7 @@ export interface ContractEntityOptions {
             StartDate?: Date;
             EndDate?: Date;
             Company?: number;
+            JobRole?: number;
             Url?: string;
             Type?: number;
             Comment?: string;
@@ -155,6 +164,11 @@ export class ContractRepository {
             {
                 name: "Company",
                 column: "CONTRACT_COMPANY",
+                type: "INTEGER",
+            },
+            {
+                name: "JobRole",
+                column: "CONTRACT_JOBROLE",
                 type: "INTEGER",
             },
             {

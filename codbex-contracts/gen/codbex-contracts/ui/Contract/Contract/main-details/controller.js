@@ -41,6 +41,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			$scope.$apply(function () {
 				$scope.entity = {};
 				$scope.optionsCompany = [];
+				$scope.optionsJobRole = [];
 				$scope.optionsType = [];
 				$scope.action = 'select';
 			});
@@ -56,6 +57,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				}
 				$scope.entity = msg.data.entity;
 				$scope.optionsCompany = msg.data.optionsCompany;
+				$scope.optionsJobRole = msg.data.optionsJobRole;
 				$scope.optionsType = msg.data.optionsType;
 				$scope.action = 'select';
 			});
@@ -65,6 +67,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			$scope.$apply(function () {
 				$scope.entity = {};
 				$scope.optionsCompany = msg.data.optionsCompany;
+				$scope.optionsJobRole = msg.data.optionsJobRole;
 				$scope.optionsType = msg.data.optionsType;
 				$scope.action = 'create';
 			});
@@ -80,9 +83,32 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				}
 				$scope.entity = msg.data.entity;
 				$scope.optionsCompany = msg.data.optionsCompany;
+				$scope.optionsJobRole = msg.data.optionsJobRole;
 				$scope.optionsType = msg.data.optionsType;
 				$scope.action = 'update';
 			});
+		});
+
+		$scope.$watch('entity.Company', function (newValue, oldValue) {
+			if (newValue !== undefined && newValue !== null) {
+				entityApi.$http.post("/services/ts/codbex-companies/gen/codbex-companies/api/Companies/JobRoleService.ts/search", {
+					$filter: {
+						equals: {
+							Company: newValue
+						}
+					}
+				}).then(function (response) {
+					$scope.optionsJobRole = response.data.map(e => {
+						return {
+							value: e.Id,
+							text: e.Name
+						}
+					});
+					if ($scope.action !== 'select' && newValue !== oldValue) {
+						$scope.entity.JobRole = undefined;
+					}
+				});
+			}
 		});
 		//-----------------Events-------------------//
 
