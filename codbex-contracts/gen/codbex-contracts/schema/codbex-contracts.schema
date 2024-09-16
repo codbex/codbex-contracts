@@ -77,6 +77,36 @@
                 ]
             },
             {
+                "name": "CODBEX_CONTRACTITEM",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "CONTRACTITEM_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 100,
+                        "nullable": true,
+                        "name": "CONTRACTITEM_NAME"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 500,
+                        "nullable": true,
+                        "name": "CONTRACTITEM_URL"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "CONTRACTITEM_CONTRACT"
+                    }
+                ]
+            },
+            {
                 "name": "Contract_Company",
                 "type": "foreignKey",
                 "table": "CODBEX_CONTRACT",
@@ -102,6 +132,15 @@
                 "columns": "CONTRACT_TYPE",
                 "referencedTable": "CODBEX_CONTRACTTYPE",
                 "referencedColumns": "CONTRACTTYPE_ID"
+            },
+            {
+                "name": "ContractItem_Contract",
+                "type": "foreignKey",
+                "table": "CODBEX_CONTRACTITEM",
+                "constraintName": "ContractItem_Contract",
+                "columns": "CONTRACTITEM_CONTRACT",
+                "referencedTable": "CODBEX_CONTRACT",
+                "referencedColumns": "CONTRACT_ID"
             }
         ]
     },

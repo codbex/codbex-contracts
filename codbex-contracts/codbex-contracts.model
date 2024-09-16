@@ -443,6 +443,81 @@
                 "title": "JobRole",
                 "tooltip": "JobRole",
                 "type": "PROJECTION"
+            },
+            {
+                "properties": [
+                    {
+                        "dataAutoIncrement": "true",
+                        "dataName": "CONTRACTITEM_ID",
+                        "dataNullable": "true",
+                        "dataPrimaryKey": "true",
+                        "dataType": "INTEGER",
+                        "name": "Id",
+                        "widgetIsMajor": "true",
+                        "widgetLength": "20",
+                        "widgetSize": "",
+                        "widgetType": "TEXTBOX"
+                    },
+                    {
+                        "dataLength": "100",
+                        "dataName": "CONTRACTITEM_NAME",
+                        "dataNullable": "true",
+                        "dataType": "VARCHAR",
+                        "isRequiredProperty": "true",
+                        "name": "Name",
+                        "widgetIsMajor": "true",
+                        "widgetLength": "20",
+                        "widgetSize": "",
+                        "widgetType": "TEXTBOX"
+                    },
+                    {
+                        "dataLength": "500",
+                        "dataName": "CONTRACTITEM_URL",
+                        "dataNullable": "true",
+                        "dataType": "VARCHAR",
+                        "name": "Url",
+                        "widgetIsMajor": "true",
+                        "widgetLength": "20",
+                        "widgetSize": "",
+                        "widgetType": "URL"
+                    },
+                    {
+                        "dataName": "CONTRACTITEM_CONTRACT",
+                        "dataNullable": "true",
+                        "dataType": "INTEGER",
+                        "name": "Contract",
+                        "relationshipCardinality": "1_n",
+                        "relationshipName": "ContractItem_Contract",
+                        "relationshipType": "COMPOSITION",
+                        "widgetIsMajor": "true",
+                        "widgetLength": "20",
+                        "widgetSize": "",
+                        "widgetType": "TEXTBOX",
+                        "relationshipEntityName": "Contract",
+                        "relationshipEntityPerspectiveName": "Contract",
+                        "relationshipEntityPerspectiveLabel": "Entities"
+                    }
+                ],
+                "caption": "Manage entity ContractItem",
+                "dataCount": "SELECT COUNT(*) AS COUNT FROM \"${tablePrefix}CONTRACTITEM\"",
+                "dataName": "CONTRACTITEM",
+                "dataQuery": "",
+                "generateReport": "false",
+                "icon": "/services/web/resources/unicons/file.svg",
+                "layoutType": "MANAGE_DETAILS",
+                "menuIndex": "100",
+                "menuKey": "contractitem",
+                "menuLabel": "ContractItem",
+                "name": "ContractItem",
+                "navigationPath": "/Home",
+                "perspectiveIcon": "/services/web/resources/unicons/document-info.svg",
+                "perspectiveLabel": "Contract",
+                "perspectiveName": "Contract",
+                "perspectiveOrder": "100",
+                "perspectiveRole": "",
+                "title": "ContractItem",
+                "tooltip": "ContractItem",
+                "type": "DEPENDENT"
             }
         ],
         "perspectives": [
