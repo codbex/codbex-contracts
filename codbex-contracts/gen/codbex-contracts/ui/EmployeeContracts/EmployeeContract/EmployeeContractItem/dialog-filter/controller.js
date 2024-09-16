@@ -1,6 +1,6 @@
 angular.module('page', ["ideUI", "ideView"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'codbex-contracts.Contract.ContractItem';
+		messageHubProvider.eventIdPrefix = 'codbex-contracts.EmployeeContracts.EmployeeContractItem';
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'ViewParameters', function ($scope, messageHub, ViewParameters) {
 
@@ -45,8 +45,8 @@ angular.module('page', ["ideUI", "ideView"])
 			if (entity.Document) {
 				filter.$filter.contains.Document = entity.Document;
 			}
-			if (entity.Contract !== undefined) {
-				filter.$filter.equals.Contract = entity.Contract;
+			if (entity.EmployeeContract !== undefined) {
+				filter.$filter.equals.EmployeeContract = entity.EmployeeContract;
 			}
 			messageHub.postMessage("entitySearch", {
 				entity: entity,
@@ -61,7 +61,7 @@ angular.module('page', ["ideUI", "ideView"])
 		};
 
 		$scope.cancel = function () {
-			messageHub.closeDialogWindow("ContractItem-filter");
+			messageHub.closeDialogWindow("EmployeeContractItem-filter");
 		};
 
 		$scope.clearErrorMessage = function () {

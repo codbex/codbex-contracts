@@ -1,8 +1,8 @@
-import { ContractItemRepository } from "../../gen/codbex-contracts/dao/Contract/ContractItemRepository";
+import { EmployeeContractItemRepository } from "../../gen/codbex-contracts/dao/EmployeeContracts/EmployeeContractItemRepository";
 
 export const trigger = (event) => {
 
-    const ContractItemDao = new ContractItemRepository();
+    const EmployeeContractItemDao = new EmployeeContractItemRepository();
 
     const operation = event.operation;
     const contractItem = event.entity;
@@ -24,9 +24,9 @@ export const trigger = (event) => {
             "Contract": contractItem.Id
         }
 
-        ContractItemDao.create(medicalCertificate);
-        ContractItemDao.create(bankAccountDetails);
-        ContractItemDao.create(criminalRecordCerificate);
+        EmployeeContractItemDao.create(medicalCertificate);
+        EmployeeContractItemDao.create(bankAccountDetails);
+        EmployeeContractItemDao.create(criminalRecordCerificate);
     }
 
 }

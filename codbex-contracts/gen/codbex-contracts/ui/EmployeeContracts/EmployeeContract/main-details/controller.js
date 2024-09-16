@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'codbex-contracts.Contract.Contract';
+		messageHubProvider.eventIdPrefix = 'codbex-contracts.EmployeeContracts.EmployeeContract';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/ts/codbex-contracts/gen/codbex-contracts/api/Contract/ContractService.ts";
+		entityApiProvider.baseUrl = "/services/ts/codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractService.ts";
 	}])
 	.controller('PageController', ['$scope', 'Extensions', 'messageHub', 'entityApi', function ($scope, Extensions, messageHub, entityApi) {
 
@@ -12,15 +12,15 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			details: {},
 		};
 		$scope.formHeaders = {
-			select: "Contract Details",
-			create: "Create Contract",
-			update: "Update Contract"
+			select: "EmployeeContract Details",
+			create: "Create EmployeeContract",
+			update: "Update EmployeeContract"
 		};
 		$scope.action = 'select';
 
 		//-----------------Custom Actions-------------------//
 		Extensions.get('dialogWindow', 'codbex-contracts-custom-action').then(function (response) {
-			$scope.entityActions = response.filter(e => e.perspective === "Contract" && e.view === "Contract" && e.type === "entity");
+			$scope.entityActions = response.filter(e => e.perspective === "EmployeeContracts" && e.view === "EmployeeContract" && e.type === "entity");
 		});
 
 		$scope.triggerEntityAction = function (action) {
@@ -41,6 +41,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			$scope.$apply(function () {
 				$scope.entity = {};
 				$scope.optionsCompany = [];
+				$scope.optionsJobRole = [];
 				$scope.optionsType = [];
 				$scope.action = 'select';
 			});
@@ -56,6 +57,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				}
 				$scope.entity = msg.data.entity;
 				$scope.optionsCompany = msg.data.optionsCompany;
+				$scope.optionsJobRole = msg.data.optionsJobRole;
 				$scope.optionsType = msg.data.optionsType;
 				$scope.action = 'select';
 			});
@@ -65,6 +67,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			$scope.$apply(function () {
 				$scope.entity = {};
 				$scope.optionsCompany = msg.data.optionsCompany;
+				$scope.optionsJobRole = msg.data.optionsJobRole;
 				$scope.optionsType = msg.data.optionsType;
 				$scope.action = 'create';
 			});
@@ -80,6 +83,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				}
 				$scope.entity = msg.data.entity;
 				$scope.optionsCompany = msg.data.optionsCompany;
+				$scope.optionsJobRole = msg.data.optionsJobRole;
 				$scope.optionsType = msg.data.optionsType;
 				$scope.action = 'update';
 			});
@@ -89,24 +93,24 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.create = function () {
 			entityApi.create($scope.entity).then(function (response) {
 				if (response.status != 201) {
-					messageHub.showAlertError("Contract", `Unable to create Contract: '${response.message}'`);
+					messageHub.showAlertError("EmployeeContract", `Unable to create EmployeeContract: '${response.message}'`);
 					return;
 				}
 				messageHub.postMessage("entityCreated", response.data);
 				messageHub.postMessage("clearDetails", response.data);
-				messageHub.showAlertSuccess("Contract", "Contract successfully created");
+				messageHub.showAlertSuccess("EmployeeContract", "EmployeeContract successfully created");
 			});
 		};
 
 		$scope.update = function () {
 			entityApi.update($scope.entity.Id, $scope.entity).then(function (response) {
 				if (response.status != 200) {
-					messageHub.showAlertError("Contract", `Unable to update Contract: '${response.message}'`);
+					messageHub.showAlertError("EmployeeContract", `Unable to update EmployeeContract: '${response.message}'`);
 					return;
 				}
 				messageHub.postMessage("entityUpdated", response.data);
 				messageHub.postMessage("clearDetails", response.data);
-				messageHub.showAlertSuccess("Contract", "Contract successfully updated");
+				messageHub.showAlertSuccess("EmployeeContract", "EmployeeContract successfully updated");
 			});
 		};
 

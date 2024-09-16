@@ -3,79 +3,79 @@ import { producer } from "sdk/messaging";
 import { extensions } from "sdk/extensions";
 import { dao as daoApi } from "sdk/db";
 
-export interface ContractItemEntity {
+export interface EmployeeContractItemEntity {
     readonly Id: number;
     Name?: string;
     Document?: string;
-    Contract?: number;
+    EmployeeContract?: number;
 }
 
-export interface ContractItemCreateEntity {
+export interface EmployeeContractItemCreateEntity {
     readonly Name?: string;
     readonly Document?: string;
-    readonly Contract?: number;
+    readonly EmployeeContract?: number;
 }
 
-export interface ContractItemUpdateEntity extends ContractItemCreateEntity {
+export interface EmployeeContractItemUpdateEntity extends EmployeeContractItemCreateEntity {
     readonly Id: number;
 }
 
-export interface ContractItemEntityOptions {
+export interface EmployeeContractItemEntityOptions {
     $filter?: {
         equals?: {
             Id?: number | number[];
             Name?: string | string[];
             Document?: string | string[];
-            Contract?: number | number[];
+            EmployeeContract?: number | number[];
         };
         notEquals?: {
             Id?: number | number[];
             Name?: string | string[];
             Document?: string | string[];
-            Contract?: number | number[];
+            EmployeeContract?: number | number[];
         };
         contains?: {
             Id?: number;
             Name?: string;
             Document?: string;
-            Contract?: number;
+            EmployeeContract?: number;
         };
         greaterThan?: {
             Id?: number;
             Name?: string;
             Document?: string;
-            Contract?: number;
+            EmployeeContract?: number;
         };
         greaterThanOrEqual?: {
             Id?: number;
             Name?: string;
             Document?: string;
-            Contract?: number;
+            EmployeeContract?: number;
         };
         lessThan?: {
             Id?: number;
             Name?: string;
             Document?: string;
-            Contract?: number;
+            EmployeeContract?: number;
         };
         lessThanOrEqual?: {
             Id?: number;
             Name?: string;
             Document?: string;
-            Contract?: number;
+            EmployeeContract?: number;
         };
     },
-    $select?: (keyof ContractItemEntity)[],
-    $sort?: string | (keyof ContractItemEntity)[],
+    $select?: (keyof EmployeeContractItemEntity)[],
+    $sort?: string | (keyof EmployeeContractItemEntity)[],
     $order?: 'asc' | 'desc',
     $offset?: number,
     $limit?: number,
 }
 
-interface ContractItemEntityEvent {
+interface EmployeeContractItemEntityEvent {
     readonly operation: 'create' | 'update' | 'delete';
     readonly table: string;
-    readonly entity: Partial<ContractItemEntity>;
+    readonly entity: Partial<EmployeeContractItemEntity>;
     readonly key: {
         name: string;
         column: string;
@@ -83,11 +83,11 @@ interface ContractItemEntityEvent {
     }
 }
 
-interface ContractItemUpdateEntityEvent extends ContractItemEntityEvent {
-    readonly previousEntity: ContractItemEntity;
+interface EmployeeContractItemUpdateEntityEvent extends EmployeeContractItemEntityEvent {
+    readonly previousEntity: EmployeeContractItemEntity;
 }
 
-export class ContractItemRepository {
+export class EmployeeContractItemRepository {
 
     private static readonly DEFINITION = {
         table: "CODBEX_CONTRACTITEM",
@@ -110,8 +110,8 @@ export class ContractItemRepository {
                 type: "VARCHAR",
             },
             {
-                name: "Contract",
-                column: "CONTRACTITEM_CONTRACT",
+                name: "EmployeeContract",
+                column: "CONTRACTITEM_EMPLOYEECONTRACT",
                 type: "INTEGER",
             }
         ]
@@ -120,19 +120,19 @@ export class ContractItemRepository {
     private readonly dao;
 
     constructor(dataSource = "DefaultDB") {
-        this.dao = daoApi.create(ContractItemRepository.DEFINITION, null, dataSource);
+        this.dao = daoApi.create(EmployeeContractItemRepository.DEFINITION, null, dataSource);
     }
 
-    public findAll(options?: ContractItemEntityOptions): ContractItemEntity[] {
+    public findAll(options?: EmployeeContractItemEntityOptions): EmployeeContractItemEntity[] {
         return this.dao.list(options);
     }
 
-    public findById(id: number): ContractItemEntity | undefined {
+    public findById(id: number): EmployeeContractItemEntity | undefined {
         const entity = this.dao.find(id);
         return entity ?? undefined;
     }
 
-    public create(entity: ContractItemCreateEntity): number {
+    public create(entity: EmployeeContractItemCreateEntity): number {
         const id = this.dao.insert(entity);
         this.triggerEvent({
             operation: "create",
@@ -147,7 +147,7 @@ export class ContractItemRepository {
         return id;
     }
 
-    public update(entity: ContractItemUpdateEntity): void {
+    public update(entity: EmployeeContractItemUpdateEntity): void {
         const previousEntity = this.findById(entity.Id);
         this.dao.update(entity);
         this.triggerEvent({
@@ -163,15 +163,15 @@ export class ContractItemRepository {
         });
     }
 
-    public upsert(entity: ContractItemCreateEntity | ContractItemUpdateEntity): number {
-        const id = (entity as ContractItemUpdateEntity).Id;
+    public upsert(entity: EmployeeContractItemCreateEntity | EmployeeContractItemUpdateEntity): number {
+        const id = (entity as EmployeeContractItemUpdateEntity).Id;
         if (!id) {
             return this.create(entity);
         }
 
         const existingEntity = this.findById(id);
         if (existingEntity) {
-            this.update(entity as ContractItemUpdateEntity);
+            this.update(entity as EmployeeContractItemUpdateEntity);
             return id;
         } else {
             return this.create(entity);
@@ -193,7 +193,7 @@ export class ContractItemRepository {
         });
     }
 
-    public count(options?: ContractItemEntityOptions): number {
+    public count(options?: EmployeeContractItemEntityOptions): number {
         return this.dao.count(options);
     }
 
@@ -209,8 +209,8 @@ export class ContractItemRepository {
         return 0;
     }
 
-    private async triggerEvent(data: ContractItemEntityEvent | ContractItemUpdateEntityEvent) {
-        const triggerExtensions = await extensions.loadExtensionModules("codbex-contracts-Contract-ContractItem", ["trigger"]);
+    private async triggerEvent(data: EmployeeContractItemEntityEvent | EmployeeContractItemUpdateEntityEvent) {
+        const triggerExtensions = await extensions.loadExtensionModules("codbex-contracts-EmployeeContracts-EmployeeContractItem", ["trigger"]);
         triggerExtensions.forEach(triggerExtension => {
             try {
                 triggerExtension.trigger(data);
@@ -218,6 +218,6 @@ export class ContractItemRepository {
                 console.error(error);
             }            
         });
-        producer.topic("codbex-contracts-Contract-ContractItem").send(JSON.stringify(data));
+        producer.topic("codbex-contracts-EmployeeContracts-EmployeeContractItem").send(JSON.stringify(data));
     }
 }

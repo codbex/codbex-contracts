@@ -1,9 +1,9 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'codbex-contracts.Contract.ContractItem';
+		messageHubProvider.eventIdPrefix = 'codbex-contracts.EmployeeContracts.EmployeeContractItem';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/ts/codbex-contracts/gen/codbex-contracts/api/Contract/ContractItemService.ts";
+		entityApiProvider.baseUrl = "/services/ts/codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractItemService.ts";
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'ViewParameters', 'entityApi', function ($scope, messageHub, ViewParameters, entityApi) {
 
@@ -12,9 +12,9 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			details: {},
 		};
 		$scope.formHeaders = {
-			select: "ContractItem Details",
-			create: "Create ContractItem",
-			update: "Update ContractItem"
+			select: "EmployeeContractItem Details",
+			create: "Create EmployeeContractItem",
+			update: "Update EmployeeContractItem"
 		};
 		$scope.action = 'select';
 
@@ -31,12 +31,12 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			entity[$scope.selectedMainEntityKey] = $scope.selectedMainEntityId;
 			entityApi.create(entity).then(function (response) {
 				if (response.status != 201) {
-					messageHub.showAlertError("ContractItem", `Unable to create ContractItem: '${response.message}'`);
+					messageHub.showAlertError("EmployeeContractItem", `Unable to create EmployeeContractItem: '${response.message}'`);
 					return;
 				}
 				messageHub.postMessage("entityCreated", response.data);
 				$scope.cancel();
-				messageHub.showAlertSuccess("ContractItem", "ContractItem successfully created");
+				messageHub.showAlertSuccess("EmployeeContractItem", "EmployeeContractItem successfully created");
 			});
 		};
 
@@ -46,19 +46,19 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			entity[$scope.selectedMainEntityKey] = $scope.selectedMainEntityId;
 			entityApi.update(id, entity).then(function (response) {
 				if (response.status != 200) {
-					messageHub.showAlertError("ContractItem", `Unable to update ContractItem: '${response.message}'`);
+					messageHub.showAlertError("EmployeeContractItem", `Unable to update EmployeeContractItem: '${response.message}'`);
 					return;
 				}
 				messageHub.postMessage("entityUpdated", response.data);
 				$scope.cancel();
-				messageHub.showAlertSuccess("ContractItem", "ContractItem successfully updated");
+				messageHub.showAlertSuccess("EmployeeContractItem", "EmployeeContractItem successfully updated");
 			});
 		};
 
 		$scope.cancel = function () {
 			$scope.entity = {};
 			$scope.action = 'select';
-			messageHub.closeDialogWindow("ContractItem-details");
+			messageHub.closeDialogWindow("EmployeeContractItem-details");
 		};
 
 	}]);

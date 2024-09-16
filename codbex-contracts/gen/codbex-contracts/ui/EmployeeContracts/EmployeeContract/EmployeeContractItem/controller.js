@@ -1,15 +1,15 @@
 angular.module('page', ["ideUI", "ideView", "entityApi"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'codbex-contracts.Contract.ContractItem';
+		messageHubProvider.eventIdPrefix = 'codbex-contracts.EmployeeContracts.EmployeeContractItem';
 	}])
 	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/ts/codbex-contracts/gen/codbex-contracts/api/Contract/ContractItemService.ts";
+		entityApiProvider.baseUrl = "/services/ts/codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractItemService.ts";
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'entityApi', 'Extensions', function ($scope, messageHub, entityApi, Extensions) {
 		//-----------------Custom Actions-------------------//
 		Extensions.get('dialogWindow', 'codbex-contracts-custom-action').then(function (response) {
-			$scope.pageActions = response.filter(e => e.perspective === "Contract" && e.view === "ContractItem" && (e.type === "page" || e.type === undefined));
-			$scope.entityActions = response.filter(e => e.perspective === "Contract" && e.view === "ContractItem" && e.type === "entity");
+			$scope.pageActions = response.filter(e => e.perspective === "EmployeeContracts" && e.view === "EmployeeContractItem" && (e.type === "page" || e.type === undefined));
+			$scope.entityActions = response.filter(e => e.perspective === "EmployeeContracts" && e.view === "EmployeeContractItem" && e.type === "entity");
 		});
 
 		$scope.triggerPageAction = function (action) {
@@ -43,13 +43,13 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		resetPagination();
 
 		//-----------------Events-------------------//
-		messageHub.onDidReceiveMessage("codbex-contracts.Contract.Contract.entitySelected", function (msg) {
+		messageHub.onDidReceiveMessage("codbex-contracts.EmployeeContracts.EmployeeContract.entitySelected", function (msg) {
 			resetPagination();
 			$scope.selectedMainEntityId = msg.data.selectedMainEntityId;
 			$scope.loadPage($scope.dataPage);
 		}, true);
 
-		messageHub.onDidReceiveMessage("codbex-contracts.Contract.Contract.clearDetails", function (msg) {
+		messageHub.onDidReceiveMessage("codbex-contracts.EmployeeContracts.EmployeeContract.clearDetails", function (msg) {
 			$scope.$apply(function () {
 				resetPagination();
 				$scope.selectedMainEntityId = null;
@@ -81,7 +81,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		//-----------------Events-------------------//
 
 		$scope.loadPage = function (pageNumber, filter) {
-			let Contract = $scope.selectedMainEntityId;
+			let EmployeeContract = $scope.selectedMainEntityId;
 			$scope.dataPage = pageNumber;
 			if (!filter && $scope.filter) {
 				filter = $scope.filter;
@@ -95,10 +95,10 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			if (!filter.$filter.equals) {
 				filter.$filter.equals = {};
 			}
-			filter.$filter.equals.Contract = Contract;
+			filter.$filter.equals.EmployeeContract = EmployeeContract;
 			entityApi.count(filter).then(function (response) {
 				if (response.status != 200) {
-					messageHub.showAlertError("ContractItem", `Unable to count ContractItem: '${response.message}'`);
+					messageHub.showAlertError("EmployeeContractItem", `Unable to count EmployeeContractItem: '${response.message}'`);
 					return;
 				}
 				if (response.data) {
@@ -108,7 +108,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				filter.$limit = $scope.dataLimit;
 				entityApi.search(filter).then(function (response) {
 					if (response.status != 200) {
-						messageHub.showAlertError("ContractItem", `Unable to list/filter ContractItem: '${response.message}'`);
+						messageHub.showAlertError("EmployeeContractItem", `Unable to list/filter EmployeeContractItem: '${response.message}'`);
 						return;
 					}
 					$scope.data = response.data;
@@ -122,33 +122,33 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 
 		$scope.openDetails = function (entity) {
 			$scope.selectedEntity = entity;
-			messageHub.showDialogWindow("ContractItem-details", {
+			messageHub.showDialogWindow("EmployeeContractItem-details", {
 				action: "select",
 				entity: entity,
 			});
 		};
 
 		$scope.openFilter = function (entity) {
-			messageHub.showDialogWindow("ContractItem-filter", {
+			messageHub.showDialogWindow("EmployeeContractItem-filter", {
 				entity: $scope.filterEntity,
 			});
 		};
 
 		$scope.createEntity = function () {
 			$scope.selectedEntity = null;
-			messageHub.showDialogWindow("ContractItem-details", {
+			messageHub.showDialogWindow("EmployeeContractItem-details", {
 				action: "create",
 				entity: {},
-				selectedMainEntityKey: "Contract",
+				selectedMainEntityKey: "EmployeeContract",
 				selectedMainEntityId: $scope.selectedMainEntityId,
 			}, null, false);
 		};
 
 		$scope.updateEntity = function (entity) {
-			messageHub.showDialogWindow("ContractItem-details", {
+			messageHub.showDialogWindow("EmployeeContractItem-details", {
 				action: "update",
 				entity: entity,
-				selectedMainEntityKey: "Contract",
+				selectedMainEntityKey: "EmployeeContract",
 				selectedMainEntityId: $scope.selectedMainEntityId,
 			}, null, false);
 		};
@@ -156,8 +156,8 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.deleteEntity = function (entity) {
 			let id = entity.Id;
 			messageHub.showDialogAsync(
-				'Delete ContractItem?',
-				`Are you sure you want to delete ContractItem? This action cannot be undone.`,
+				'Delete EmployeeContractItem?',
+				`Are you sure you want to delete EmployeeContractItem? This action cannot be undone.`,
 				[{
 					id: "delete-btn-yes",
 					type: "emphasized",
@@ -172,7 +172,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				if (msg.data === "delete-btn-yes") {
 					entityApi.delete(id).then(function (response) {
 						if (response.status != 204) {
-							messageHub.showAlertError("ContractItem", `Unable to delete ContractItem: '${response.message}'`);
+							messageHub.showAlertError("EmployeeContractItem", `Unable to delete EmployeeContractItem: '${response.message}'`);
 							return;
 						}
 						$scope.loadPage($scope.dataPage, $scope.filter);

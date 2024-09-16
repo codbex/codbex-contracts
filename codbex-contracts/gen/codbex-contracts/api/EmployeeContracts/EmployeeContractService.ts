@@ -1,34 +1,25 @@
 import { Controller, Get, Post, Put, Delete, response } from "sdk/http"
 import { Extensions } from "sdk/extensions"
-import { ContractItemRepository, ContractItemEntityOptions } from "../../dao/Contract/ContractItemRepository";
+import { EmployeeContractRepository, EmployeeContractEntityOptions } from "../../dao/EmployeeContracts/EmployeeContractRepository";
 import { ValidationError } from "../utils/ValidationError";
 import { HttpUtils } from "../utils/HttpUtils";
+// custom imports
+import { NumberGeneratorService } from "/codbex-number-generator/service/generator";
 
-const validationModules = await Extensions.loadExtensionModules("codbex-contracts-Contract-ContractItem", ["validate"]);
+const validationModules = await Extensions.loadExtensionModules("codbex-contracts-EmployeeContracts-EmployeeContract", ["validate"]);
 
 @Controller
-class ContractItemService {
+class EmployeeContractService {
 
-    private readonly repository = new ContractItemRepository();
+    private readonly repository = new EmployeeContractRepository();
 
     @Get("/")
     public getAll(_: any, ctx: any) {
         try {
-            const options: ContractItemEntityOptions = {
+            const options: EmployeeContractEntityOptions = {
                 $limit: ctx.queryParameters["$limit"] ? parseInt(ctx.queryParameters["$limit"]) : undefined,
                 $offset: ctx.queryParameters["$offset"] ? parseInt(ctx.queryParameters["$offset"]) : undefined
             };
-
-            let Contract = parseInt(ctx.queryParameters.Contract);
-            Contract = isNaN(Contract) ? ctx.queryParameters.Contract : Contract;
-
-            if (Contract !== undefined) {
-                options.$filter = {
-                    equals: {
-                        Contract: Contract
-                    }
-                };
-            }
 
             return this.repository.findAll(options);
         } catch (error: any) {
@@ -41,7 +32,7 @@ class ContractItemService {
         try {
             this.validateEntity(entity);
             entity.Id = this.repository.create(entity);
-            response.setHeader("Content-Location", "/services/ts/codbex-contracts/gen/codbex-contracts/api/Contract/ContractItemService.ts/" + entity.Id);
+            response.setHeader("Content-Location", "/services/ts/codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractService.ts/" + entity.Id);
             response.setStatus(response.CREATED);
             return entity;
         } catch (error: any) {
@@ -84,7 +75,7 @@ class ContractItemService {
             if (entity) {
                 return entity;
             } else {
-                HttpUtils.sendResponseNotFound("ContractItem not found");
+                HttpUtils.sendResponseNotFound("EmployeeContract not found");
             }
         } catch (error: any) {
             this.handleError(error);
@@ -112,7 +103,7 @@ class ContractItemService {
                 this.repository.deleteById(id);
                 HttpUtils.sendResponseNoContent();
             } else {
-                HttpUtils.sendResponseNotFound("ContractItem not found");
+                HttpUtils.sendResponseNotFound("EmployeeContract not found");
             }
         } catch (error: any) {
             this.handleError(error);
@@ -130,14 +121,29 @@ class ContractItemService {
     }
 
     private validateEntity(entity: any): void {
-        if (entity.Name === null || entity.Name === undefined) {
-            throw new ValidationError(`The 'Name' property is required, provide a valid value`);
+        if (entity.Number?.length > 20) {
+            throw new ValidationError(`The 'Number' exceeds the maximum length of [20] characters`);
         }
-        if (entity.Name?.length > 100) {
-            throw new ValidationError(`The 'Name' exceeds the maximum length of [100] characters`);
+        if (entity.StartDate === null || entity.StartDate === undefined) {
+            throw new ValidationError(`The 'StartDate' property is required, provide a valid value`);
+        }
+        if (entity.EndDate === null || entity.EndDate === undefined) {
+            throw new ValidationError(`The 'EndDate' property is required, provide a valid value`);
+        }
+        if (entity.Company === null || entity.Company === undefined) {
+            throw new ValidationError(`The 'Company' property is required, provide a valid value`);
+        }
+        if (entity.JobRole === null || entity.JobRole === undefined) {
+            throw new ValidationError(`The 'JobRole' property is required, provide a valid value`);
+        }
+        if (entity.Document === null || entity.Document === undefined) {
+            throw new ValidationError(`The 'Document' property is required, provide a valid value`);
         }
         if (entity.Document?.length > 500) {
             throw new ValidationError(`The 'Document' exceeds the maximum length of [500] characters`);
+        }
+        if (entity.Comment?.length > 1000) {
+            throw new ValidationError(`The 'Comment' exceeds the maximum length of [1000] characters`);
         }
         for (const next of validationModules) {
             next.validate(entity);

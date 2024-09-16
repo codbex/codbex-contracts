@@ -1,0 +1,5 @@
+{
+    "module": "codbex-contracts/gen/codbex-contracts/ui/EmployeeContracts/EmployeeContract/EmployeeContractItem/dialog-window/view.js",
+    "extensionPoint": "codbex-contracts-dialog-window",
+    "description": "codbex-contracts - Application Dialog Window"
+}

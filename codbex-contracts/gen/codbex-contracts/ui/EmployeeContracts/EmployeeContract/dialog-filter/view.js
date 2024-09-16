@@ -4,10 +4,10 @@
  * Do not modify the content as it may be re-generated again.
  */
 const viewData = {
-    id: "ContractItem-details",
-    label: "ContractItem",
-    link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/Contract/Contract/ContractItem/dialog-window/index.html",
-    perspectiveName: "Contract",
+    id: "EmployeeContract-filter",
+    label: "EmployeeContract Filter",
+    link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/EmployeeContracts/EmployeeContract/dialog-filter/index.html",
+    perspectiveName: "EmployeeContracts",
 };
 
 if (typeof exports !== 'undefined') {

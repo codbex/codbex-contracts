@@ -1,6 +1,6 @@
 angular.module('page', ["ideUI", "ideView"])
 	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'codbex-contracts.Contract.Contract';
+		messageHubProvider.eventIdPrefix = 'codbex-contracts.EmployeeContracts.EmployeeContract';
 	}])
 	.controller('PageController', ['$scope', 'messageHub', 'ViewParameters', function ($scope, messageHub, ViewParameters) {
 
@@ -27,6 +27,7 @@ angular.module('page', ["ideUI", "ideView"])
 			$scope.selectedMainEntityKey = params.selectedMainEntityKey;
 			$scope.selectedMainEntityId = params.selectedMainEntityId;
 			$scope.optionsCompany = params.optionsCompany;
+			$scope.optionsJobRole = params.optionsJobRole;
 			$scope.optionsType = params.optionsType;
 		}
 
@@ -71,6 +72,9 @@ angular.module('page', ["ideUI", "ideView"])
 			if (entity.Company !== undefined) {
 				filter.$filter.equals.Company = entity.Company;
 			}
+			if (entity.JobRole !== undefined) {
+				filter.$filter.equals.JobRole = entity.JobRole;
+			}
 			if (entity.Document) {
 				filter.$filter.contains.Document = entity.Document;
 			}
@@ -94,7 +98,7 @@ angular.module('page', ["ideUI", "ideView"])
 		};
 
 		$scope.cancel = function () {
-			messageHub.closeDialogWindow("Contract-filter");
+			messageHub.closeDialogWindow("EmployeeContract-filter");
 		};
 
 		$scope.clearErrorMessage = function () {

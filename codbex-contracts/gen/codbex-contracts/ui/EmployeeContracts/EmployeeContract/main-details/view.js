@@ -4,12 +4,12 @@
  * Do not modify the content as it may be re-generated again.
  */
 const viewData = {
-    id: "ContractItem",
-    label: "ContractItem",
+    id: "EmployeeContract-details",
+    label: "EmployeeContract",
     factory: "frame",
-    region: "bottom",
-    link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/Contract/Contract/ContractItem/index.html",
-    perspectiveName: "Contract",
+    region: "center",
+    link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/EmployeeContracts/EmployeeContract/main-details/index.html",
+    perspectiveName: "EmployeeContracts",
 };
 
 if (typeof exports !== 'undefined') {
