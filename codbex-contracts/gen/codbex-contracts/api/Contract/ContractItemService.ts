@@ -136,8 +136,8 @@ class ContractItemService {
         if (entity.Name?.length > 100) {
             throw new ValidationError(`The 'Name' exceeds the maximum length of [100] characters`);
         }
-        if (entity.Url?.length > 500) {
-            throw new ValidationError(`The 'Url' exceeds the maximum length of [500] characters`);
+        if (entity.Document?.length > 500) {
+            throw new ValidationError(`The 'Document' exceeds the maximum length of [500] characters`);
         }
         for (const next of validationModules) {
             next.validate(entity);

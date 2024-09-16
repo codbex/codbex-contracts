@@ -1067,7 +1067,7 @@ paths:
                       Id: 33
                     contains:
                       Name: "abcd"
-                      Url: "abcd"
+                      Document: "abcd"
                     greaterThan:
                       Id: 0
                     lessThanOrEqual:
@@ -1090,7 +1090,7 @@ paths:
                   $filter:
                     contains:
                       Name: "abcd"
-                      Url: "abcd"
+                      Document: "abcd"
               countWithGreaterThan:
                 summary: Count with Greater Than
                 value:
@@ -1155,7 +1155,7 @@ paths:
                       Id: 33
                     contains:
                       Name: "abcd"
-                      Url: "abcd"
+                      Document: "abcd"
                     greaterThan:
                       Id: 0
                     lessThanOrEqual:
@@ -1178,7 +1178,7 @@ paths:
                   $filter:
                     contains:
                       Name: "abcd"
-                      Url: "abcd"
+                      Document: "abcd"
               searchWithGreaterThan:
                 summary: Search with Greater Than
                 value:
@@ -1707,7 +1707,7 @@ components:
           type: string
           minLength: 0
           maxLength: 100
-        Url:
+        Document:
           type: string
           minLength: 0
           maxLength: 500
@@ -1742,7 +1742,7 @@ components:
                         format: double
                         minLength: 0
                         maxLength: 100
-                Url:
+                Document:
                   oneOf:
                     - type: string
                       minLength: 0
@@ -1783,7 +1783,7 @@ components:
                         format: double
                         minLength: 0
                         maxLength: 100
-                Url:
+                Document:
                   oneOf:
                     - type: string
                       minLength: 0
@@ -1810,7 +1810,7 @@ components:
                   type: string
                   minLength: 0
                   maxLength: 100
-                Url:
+                Document:
                   type: string
                   minLength: 0
                   maxLength: 500
@@ -1825,7 +1825,7 @@ components:
                   type: string
                   minLength: 0
                   maxLength: 100
-                Url:
+                Document:
                   type: string
                   minLength: 0
                   maxLength: 500
@@ -1842,7 +1842,7 @@ components:
                   type: string
                   minLength: 0
                   maxLength: 100
-                Url:
+                Document:
                   type: string
                   minLength: 0
                   maxLength: 500
@@ -1859,7 +1859,7 @@ components:
                   type: string
                   minLength: 0
                   maxLength: 100
-                Url:
+                Document:
                   type: string
                   minLength: 0
                   maxLength: 500
@@ -1876,7 +1876,7 @@ components:
                   type: string
                   minLength: 0
                   maxLength: 100
-                Url:
+                Document:
                   type: string
                   minLength: 0
                   maxLength: 500
@@ -1885,12 +1885,12 @@ components:
                   format: int32
         $select:
           type: array
-          example: ["Id", "Name", "Url", "Contract"]
+          example: ["Id", "Name", "Document", "Contract"]
           items:
             type: string
         $sort:
           - type: string
-            example: "Id,Name,Url,Contract"
+            example: "Id,Name,Document,Contract"
         $order:
           type: string
           enum: ["asc", "desc"]

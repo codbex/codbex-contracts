@@ -475,7 +475,7 @@
                         "dataName": "CONTRACTITEM_URL",
                         "dataNullable": "true",
                         "dataType": "VARCHAR",
-                        "name": "Url",
+                        "name": "Document",
                         "widgetIsMajor": "true",
                         "widgetLength": "20",
                         "widgetSize": "",

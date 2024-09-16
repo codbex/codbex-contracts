@@ -1,29 +1,27 @@
 import { ContractItemRepository } from "../../gen/codbex-contracts/dao/Contract/ContractItemRepository";
 
-
 export const trigger = (event) => {
 
     const ContractItemDao = new ContractItemRepository();
 
     const operation = event.operation;
-    const item = event.entity;
+    const contractItem = event.entity;
 
     if (operation === "create") {
 
-
         const medicalCertificate = {
             "Name": "Medical Certificate",
-            "Contract": item.Id
+            "Contract": contractItem.Id
         }
 
         const bankAccountDetails = {
             "Name": "Bank Account Details",
-            "Contract": item.Id
+            "Contract": contractItem.Id
         }
 
         const criminalRecordCerificate = {
             "Name": "Criminal Record Cerificate",
-            "Contract": item.Id
+            "Contract": contractItem.Id
         }
 
         ContractItemDao.create(medicalCertificate);

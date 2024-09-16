@@ -6,13 +6,13 @@ import { dao as daoApi } from "sdk/db";
 export interface ContractItemEntity {
     readonly Id: number;
     Name?: string;
-    Url?: string;
+    Document?: string;
     Contract?: number;
 }
 
 export interface ContractItemCreateEntity {
     readonly Name?: string;
-    readonly Url?: string;
+    readonly Document?: string;
     readonly Contract?: number;
 }
 
@@ -25,43 +25,43 @@ export interface ContractItemEntityOptions {
         equals?: {
             Id?: number | number[];
             Name?: string | string[];
-            Url?: string | string[];
+            Document?: string | string[];
             Contract?: number | number[];
         };
         notEquals?: {
             Id?: number | number[];
             Name?: string | string[];
-            Url?: string | string[];
+            Document?: string | string[];
             Contract?: number | number[];
         };
         contains?: {
             Id?: number;
             Name?: string;
-            Url?: string;
+            Document?: string;
             Contract?: number;
         };
         greaterThan?: {
             Id?: number;
             Name?: string;
-            Url?: string;
+            Document?: string;
             Contract?: number;
         };
         greaterThanOrEqual?: {
             Id?: number;
             Name?: string;
-            Url?: string;
+            Document?: string;
             Contract?: number;
         };
         lessThan?: {
             Id?: number;
             Name?: string;
-            Url?: string;
+            Document?: string;
             Contract?: number;
         };
         lessThanOrEqual?: {
             Id?: number;
             Name?: string;
-            Url?: string;
+            Document?: string;
             Contract?: number;
         };
     },
@@ -105,7 +105,7 @@ export class ContractItemRepository {
                 type: "VARCHAR",
             },
             {
-                name: "Url",
+                name: "Document",
                 column: "CONTRACTITEM_URL",
                 type: "VARCHAR",
             },

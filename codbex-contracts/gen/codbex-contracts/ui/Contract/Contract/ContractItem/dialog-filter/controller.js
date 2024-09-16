@@ -42,8 +42,8 @@ angular.module('page', ["ideUI", "ideView"])
 			if (entity.Name) {
 				filter.$filter.contains.Name = entity.Name;
 			}
-			if (entity.Url) {
-				filter.$filter.contains.Url = entity.Url;
+			if (entity.Document) {
+				filter.$filter.contains.Document = entity.Document;
 			}
 			if (entity.Contract !== undefined) {
 				filter.$filter.equals.Contract = entity.Contract;
