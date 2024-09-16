@@ -1,0 +1,5 @@
+{
+    "module": "codbex-contracts/events/ContractItem/ContractItemHandler.ts",
+    "extensionPoint": "codbex-contracts-Contract-Contract",
+    "description": "Contract Extension"
+}
