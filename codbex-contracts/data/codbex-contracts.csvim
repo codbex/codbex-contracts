@@ -3,7 +3,7 @@
     {
       "table": "CODBEX_CONTRACTTYPE",
       "schema": "PUBLIC",
-      "file": "/codbex-contracts-data/contract-types.csv",
+      "file": "/codbex-contracts/data/contract-types.csv",
       "header": true,
       "useHeaderNames": true,
       "delimField": ",",
