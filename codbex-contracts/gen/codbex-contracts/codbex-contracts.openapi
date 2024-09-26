@@ -11,6 +11,8 @@ servers:
 tags:
   - name: Contract
   - name: Settings
+  - name: EmployeeContracts
+  - name: EmployeeContracts
 paths:
   /codbex-contracts/gen/codbex-contracts/api/Contract/ContractService.ts:
     get:
@@ -258,7 +260,7 @@ paths:
                       Id: 33
                     contains:
                       Number: "abcd"
-                      Url: "abcd"
+                      Document: "abcd"
                       Comment: "abcd"
                     greaterThan:
                       Id: 0
@@ -282,7 +284,7 @@ paths:
                   $filter:
                     contains:
                       Number: "abcd"
-                      Url: "abcd"
+                      Document: "abcd"
                       Comment: "abcd"
               countWithGreaterThan:
                 summary: Count with Greater Than
@@ -348,7 +350,7 @@ paths:
                       Id: 33
                     contains:
                       Number: "abcd"
-                      Url: "abcd"
+                      Document: "abcd"
                       Comment: "abcd"
                     greaterThan:
                       Id: 0
@@ -372,7 +374,7 @@ paths:
                   $filter:
                     contains:
                       Number: "abcd"
-                      Url: "abcd"
+                      Document: "abcd"
                       Comment: "abcd"
               searchWithGreaterThan:
                 summary: Search with Greater Than
@@ -820,6 +822,818 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractService.ts:
+    get:
+      summary: List EmployeeContract
+      parameters:
+        - in: query
+          name: $limit
+          description: The number of records to be returned _(both `$limit` and `$offset` should be provided)_.
+          required: false
+          allowReserved: true
+          schema:
+            type: integer
+            allowEmptyValue: true
+        - in: query
+          name: $offset
+          description: The number of records to skip _(both `$limit` and `$offset` should be provided)_.
+          required: false
+          allowReserved: true
+          schema:
+            type: integer
+            allowEmptyValue: true
+      tags:
+        - EmployeeContracts
+      responses:
+        200:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/EmployeeContract'
+        400:
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create EmployeeContract
+      tags:
+        - EmployeeContracts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeContract'
+        required: true
+      responses:
+        201:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeContract'
+        400:
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractService.ts/{id}:
+    get:
+      summary: Get EmployeeContract by Id
+      parameters:
+        - in: path
+          name: id
+          description: The Id of the entity.
+          required: true
+          schema:
+            type: string
+      tags:
+        - EmployeeContracts
+      responses:
+        200:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/EmployeeContract'
+        404:
+          description: Entity Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update EmployeeContract by Id
+      parameters:
+        - in: path
+          name: id
+          description: The Id of the entity.
+          required: true
+          schema:
+            type: string
+      tags:
+        - EmployeeContracts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeContract'
+        required: true
+      responses:
+        200:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeContract'
+        400:
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Entity Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete EmployeeContract by Id
+      parameters:
+        - in: path
+          name: id
+          description: The Id of the entity.
+          required: true
+          schema:
+            type: string
+      tags:
+        - EmployeeContracts
+      responses:
+        204:
+          description: Successful Request
+        404:
+          description: Entity Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractService.ts/count:
+    get:
+      summary: Count the number of EmployeeContract
+      tags:
+        - EmployeeContracts
+      responses:
+        200:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 100
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Count the number of EmployeeContract by EmployeeContractFilterOptions
+      tags:
+        - EmployeeContracts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeContractFilterOptions'
+            examples:
+              countWithMultipleCriteria:
+                summary: Count with multiple criteria
+                value:
+                  $filter:
+                    notEquals:
+                      Id: 33
+                    contains:
+                      Number: "abcd"
+                      Document: "abcd"
+                      Comment: "abcd"
+                    greaterThan:
+                      Id: 0
+                    lessThanOrEqual:
+                      Id: 100
+              countWithEquals:
+                summary: Count with Equals
+                value:
+                  $filter:
+                    equals:
+                      Id: 0
+              countWithNotEquals:
+                summary: Count with Not Equals
+                value:
+                  $filter:
+                    notEquals:
+                      Id: 0
+              countWithContains:
+                summary: Count with Contains
+                value:
+                  $filter:
+                    contains:
+                      Number: "abcd"
+                      Document: "abcd"
+                      Comment: "abcd"
+              countWithGreaterThan:
+                summary: Count with Greater Than
+                value:
+                  $filter:
+                    greaterThan:
+                      Id: 0
+              countWithGreaterThanOrEqual:
+                summary: Count with Greater Than Or Equal
+                value:
+                  $filter:
+                    greaterThanOrEqual:
+                      Id: 0
+              countWithLessThan:
+                summary: Count with Less Than
+                value:
+                  $filter:
+                    lessThan:
+                      Id: 0
+              countWithLessThanOrEqual:
+                summary: Count with Less Than Or Equal
+                value:
+                  $filter:
+                    lessThanOrEqual:
+                      Id: 0
+        required: true
+      responses:
+        200:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 100
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractService.ts/search:
+    post:
+      summary: Search EmployeeContract by EmployeeContractFilterOptions
+      tags:
+        - EmployeeContracts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeContractFilterOptions'
+            examples:
+              searchWithMultipleCriteria:
+                summary: Search with multiple criteria
+                value:
+                  $filter:
+                    notEquals:
+                      Id: 33
+                    contains:
+                      Number: "abcd"
+                      Document: "abcd"
+                      Comment: "abcd"
+                    greaterThan:
+                      Id: 0
+                    lessThanOrEqual:
+                      Id: 100
+              searchWithEquals:
+                summary: Search with Equals
+                value:
+                  $filter:
+                    equals:
+                      Id: 0
+              searchWithNotEquals:
+                summary: Search with Not Equals
+                value:
+                  $filter:
+                    notEquals:
+                      Id: 0
+              searchWithContains:
+                summary: Search with Contains
+                value:
+                  $filter:
+                    contains:
+                      Number: "abcd"
+                      Document: "abcd"
+                      Comment: "abcd"
+              searchWithGreaterThan:
+                summary: Search with Greater Than
+                value:
+                  $filter:
+                    greaterThan:
+                      Id: 0
+              searchWithGreaterThanOrEqual:
+                summary: Search with Greater Than Or Equal
+                value:
+                  $filter:
+                    greaterThanOrEqual:
+                      Id: 0
+              searchWithLessThan:
+                summary: Search with Less Than
+                value:
+                  $filter:
+                    lessThan:
+                      Id: 0
+              searchWithLessThanOrEqual:
+                summary: Search with Less Than Or Equal
+                value:
+                  $filter:
+                    lessThanOrEqual:
+                      Id: 0
+        required: true
+      responses:
+        200:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/EmployeeContract'
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractItemService.ts:
+    get:
+      summary: List EmployeeContractItem
+      parameters:
+        - in: query
+          name: $limit
+          description: The number of records to be returned _(both `$limit` and `$offset` should be provided)_.
+          required: false
+          allowReserved: true
+          schema:
+            type: integer
+            allowEmptyValue: true
+        - in: query
+          name: $offset
+          description: The number of records to skip _(both `$limit` and `$offset` should be provided)_.
+          required: false
+          allowReserved: true
+          schema:
+            type: integer
+            allowEmptyValue: true
+      tags:
+        - EmployeeContracts
+      responses:
+        200:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/EmployeeContractItem'
+        400:
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create EmployeeContractItem
+      tags:
+        - EmployeeContracts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeContractItem'
+        required: true
+      responses:
+        201:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeContractItem'
+        400:
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractItemService.ts/{id}:
+    get:
+      summary: Get EmployeeContractItem by Id
+      parameters:
+        - in: path
+          name: id
+          description: The Id of the entity.
+          required: true
+          schema:
+            type: string
+      tags:
+        - EmployeeContracts
+      responses:
+        200:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/EmployeeContractItem'
+        404:
+          description: Entity Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update EmployeeContractItem by Id
+      parameters:
+        - in: path
+          name: id
+          description: The Id of the entity.
+          required: true
+          schema:
+            type: string
+      tags:
+        - EmployeeContracts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeContractItem'
+        required: true
+      responses:
+        200:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeContractItem'
+        400:
+          description: Bad Request Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Entity Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete EmployeeContractItem by Id
+      parameters:
+        - in: path
+          name: id
+          description: The Id of the entity.
+          required: true
+          schema:
+            type: string
+      tags:
+        - EmployeeContracts
+      responses:
+        204:
+          description: Successful Request
+        404:
+          description: Entity Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractItemService.ts/count:
+    get:
+      summary: Count the number of EmployeeContractItem
+      tags:
+        - EmployeeContracts
+      responses:
+        200:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 100
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Count the number of EmployeeContractItem by EmployeeContractItemFilterOptions
+      tags:
+        - EmployeeContracts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeContractItemFilterOptions'
+            examples:
+              countWithMultipleCriteria:
+                summary: Count with multiple criteria
+                value:
+                  $filter:
+                    notEquals:
+                      Id: 33
+                    contains:
+                      Name: "abcd"
+                      Document: "abcd"
+                    greaterThan:
+                      Id: 0
+                    lessThanOrEqual:
+                      Id: 100
+              countWithEquals:
+                summary: Count with Equals
+                value:
+                  $filter:
+                    equals:
+                      Id: 0
+              countWithNotEquals:
+                summary: Count with Not Equals
+                value:
+                  $filter:
+                    notEquals:
+                      Id: 0
+              countWithContains:
+                summary: Count with Contains
+                value:
+                  $filter:
+                    contains:
+                      Name: "abcd"
+                      Document: "abcd"
+              countWithGreaterThan:
+                summary: Count with Greater Than
+                value:
+                  $filter:
+                    greaterThan:
+                      Id: 0
+              countWithGreaterThanOrEqual:
+                summary: Count with Greater Than Or Equal
+                value:
+                  $filter:
+                    greaterThanOrEqual:
+                      Id: 0
+              countWithLessThan:
+                summary: Count with Less Than
+                value:
+                  $filter:
+                    lessThan:
+                      Id: 0
+              countWithLessThanOrEqual:
+                summary: Count with Less Than Or Equal
+                value:
+                  $filter:
+                    lessThanOrEqual:
+                      Id: 0
+        required: true
+      responses:
+        200:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 100
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractItemService.ts/search:
+    post:
+      summary: Search EmployeeContractItem by EmployeeContractItemFilterOptions
+      tags:
+        - EmployeeContracts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeContractItemFilterOptions'
+            examples:
+              searchWithMultipleCriteria:
+                summary: Search with multiple criteria
+                value:
+                  $filter:
+                    notEquals:
+                      Id: 33
+                    contains:
+                      Name: "abcd"
+                      Document: "abcd"
+                    greaterThan:
+                      Id: 0
+                    lessThanOrEqual:
+                      Id: 100
+              searchWithEquals:
+                summary: Search with Equals
+                value:
+                  $filter:
+                    equals:
+                      Id: 0
+              searchWithNotEquals:
+                summary: Search with Not Equals
+                value:
+                  $filter:
+                    notEquals:
+                      Id: 0
+              searchWithContains:
+                summary: Search with Contains
+                value:
+                  $filter:
+                    contains:
+                      Name: "abcd"
+                      Document: "abcd"
+              searchWithGreaterThan:
+                summary: Search with Greater Than
+                value:
+                  $filter:
+                    greaterThan:
+                      Id: 0
+              searchWithGreaterThanOrEqual:
+                summary: Search with Greater Than Or Equal
+                value:
+                  $filter:
+                    greaterThanOrEqual:
+                      Id: 0
+              searchWithLessThan:
+                summary: Search with Less Than
+                value:
+                  $filter:
+                    lessThan:
+                      Id: 0
+              searchWithLessThanOrEqual:
+                summary: Search with Less Than Or Equal
+                value:
+                  $filter:
+                    lessThanOrEqual:
+                      Id: 0
+        required: true
+      responses:
+        200:
+          description: Successful Request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                    $ref: '#/components/schemas/EmployeeContractItem'
+        403:
+          description: Forbidden Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   schemas:
     Contract:
@@ -828,7 +1642,7 @@ components:
         - StartDate
         - EndDate
         - Company
-        - Url
+        - Document
       properties:
         Id:
           type: integer
@@ -843,7 +1657,7 @@ components:
         Company:
           type: integer
           format: int32
-        Url:
+        Document:
           type: string
           minLength: 0
           maxLength: 500
@@ -894,7 +1708,7 @@ components:
                       items:
                         type: integer
                         format: int32
-                Url:
+                Document:
                   oneOf:
                     - type: string
                       minLength: 0
@@ -958,7 +1772,7 @@ components:
                       items:
                         type: integer
                         format: int32
-                Url:
+                Document:
                   oneOf:
                     - type: string
                       minLength: 0
@@ -999,7 +1813,7 @@ components:
                 StartDate:
                 EndDate:
                 Company:
-                Url:
+                Document:
                   type: string
                   minLength: 0
                   maxLength: 500
@@ -1023,7 +1837,7 @@ components:
                 Company:
                   type: integer
                   format: int32
-                Url:
+                Document:
                   type: string
                   minLength: 0
                   maxLength: 500
@@ -1049,7 +1863,7 @@ components:
                 Company:
                   type: integer
                   format: int32
-                Url:
+                Document:
                   type: string
                   minLength: 0
                   maxLength: 500
@@ -1075,7 +1889,7 @@ components:
                 Company:
                   type: integer
                   format: int32
-                Url:
+                Document:
                   type: string
                   minLength: 0
                   maxLength: 500
@@ -1101,7 +1915,7 @@ components:
                 Company:
                   type: integer
                   format: int32
-                Url:
+                Document:
                   type: string
                   minLength: 0
                   maxLength: 500
@@ -1114,12 +1928,12 @@ components:
                   maxLength: 1000
         $select:
           type: array
-          example: ["Id", "Number", "StartDate", "EndDate", "Company", "Url", "Type", "Comment"]
+          example: ["Id", "Number", "StartDate", "EndDate", "Company", "Document", "Type", "Comment"]
           items:
             type: string
         $sort:
           - type: string
-            example: "Id,Number,StartDate,EndDate,Company,Url,Type,Comment"
+            example: "Id,Number,StartDate,EndDate,Company,Document,Type,Comment"
         $order:
           type: string
           enum: ["asc", "desc"]
@@ -1247,6 +2061,553 @@ components:
         $sort:
           - type: string
             example: "Id,Name"
+        $order:
+          type: string
+          enum: ["asc", "desc"]
+          example: "asc"
+        $offset:
+          type: integer
+          example: 0
+        $limit:
+          type: integer
+          example: 10
+    EmployeeContract:
+      type: object
+      required:
+        - StartDate
+        - EndDate
+        - Company
+        - JobRole
+        - Document
+      properties:
+        Id:
+          type: integer
+          format: int32
+        Number:
+          type: string
+          minLength: 0
+          maxLength: 20
+          readOnly: true
+        StartDate:
+        EndDate:
+        Company:
+          type: integer
+          format: int32
+        JobRole:
+          type: integer
+          format: int32
+        Document:
+          type: string
+          minLength: 0
+          maxLength: 500
+        Type:
+          type: integer
+          format: int32
+        Comment:
+          type: string
+          minLength: 0
+          maxLength: 1000
+    EmployeeContractFilterOptions:
+      type: object
+      properties:
+        $filter:
+          type: object
+          properties:
+            equals:
+              type: object
+              properties:
+                Id:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+                Number:
+                  oneOf:
+                    - type: string
+                      minLength: 0
+                      maxLength: 20
+                    - type: array
+                      items:
+                        type: string
+                        format: double
+                        minLength: 0
+                        maxLength: 20
+                StartDate:
+                  oneOf:
+                EndDate:
+                  oneOf:
+                Company:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+                JobRole:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+                Document:
+                  oneOf:
+                    - type: string
+                      minLength: 0
+                      maxLength: 500
+                    - type: array
+                      items:
+                        type: string
+                        format: double
+                        minLength: 0
+                        maxLength: 500
+                Type:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+                Comment:
+                  oneOf:
+                    - type: string
+                      minLength: 0
+                      maxLength: 1000
+                    - type: array
+                      items:
+                        type: string
+                        format: double
+                        minLength: 0
+                        maxLength: 1000
+            notEquals:
+              type: object
+              properties:
+                Id:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+                Number:
+                  oneOf:
+                    - type: string
+                      minLength: 0
+                      maxLength: 20
+                    - type: array
+                      items:
+                        type: string
+                        format: double
+                        minLength: 0
+                        maxLength: 20
+                StartDate:
+                  oneOf:
+                EndDate:
+                  oneOf:
+                Company:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+                JobRole:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+                Document:
+                  oneOf:
+                    - type: string
+                      minLength: 0
+                      maxLength: 500
+                    - type: array
+                      items:
+                        type: string
+                        format: double
+                        minLength: 0
+                        maxLength: 500
+                Type:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+                Comment:
+                  oneOf:
+                    - type: string
+                      minLength: 0
+                      maxLength: 1000
+                    - type: array
+                      items:
+                        type: string
+                        format: double
+                        minLength: 0
+                        maxLength: 1000
+            contains:
+              type: object
+              properties:
+                Id:
+                Number:
+                  type: string
+                  minLength: 0
+                  maxLength: 20
+                StartDate:
+                EndDate:
+                Company:
+                JobRole:
+                Document:
+                  type: string
+                  minLength: 0
+                  maxLength: 500
+                Type:
+                Comment:
+                  type: string
+                  minLength: 0
+                  maxLength: 1000
+            greaterThan:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                  format: int32
+                Number:
+                  type: string
+                  minLength: 0
+                  maxLength: 20
+                StartDate:
+                EndDate:
+                Company:
+                  type: integer
+                  format: int32
+                JobRole:
+                  type: integer
+                  format: int32
+                Document:
+                  type: string
+                  minLength: 0
+                  maxLength: 500
+                Type:
+                  type: integer
+                  format: int32
+                Comment:
+                  type: string
+                  minLength: 0
+                  maxLength: 1000
+            greaterThanOrEqual:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                  format: int32
+                Number:
+                  type: string
+                  minLength: 0
+                  maxLength: 20
+                StartDate:
+                EndDate:
+                Company:
+                  type: integer
+                  format: int32
+                JobRole:
+                  type: integer
+                  format: int32
+                Document:
+                  type: string
+                  minLength: 0
+                  maxLength: 500
+                Type:
+                  type: integer
+                  format: int32
+                Comment:
+                  type: string
+                  minLength: 0
+                  maxLength: 1000
+            lessThan:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                  format: int32
+                Number:
+                  type: string
+                  minLength: 0
+                  maxLength: 20
+                StartDate:
+                EndDate:
+                Company:
+                  type: integer
+                  format: int32
+                JobRole:
+                  type: integer
+                  format: int32
+                Document:
+                  type: string
+                  minLength: 0
+                  maxLength: 500
+                Type:
+                  type: integer
+                  format: int32
+                Comment:
+                  type: string
+                  minLength: 0
+                  maxLength: 1000
+            lessThanOrEqual:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                  format: int32
+                Number:
+                  type: string
+                  minLength: 0
+                  maxLength: 20
+                StartDate:
+                EndDate:
+                Company:
+                  type: integer
+                  format: int32
+                JobRole:
+                  type: integer
+                  format: int32
+                Document:
+                  type: string
+                  minLength: 0
+                  maxLength: 500
+                Type:
+                  type: integer
+                  format: int32
+                Comment:
+                  type: string
+                  minLength: 0
+                  maxLength: 1000
+        $select:
+          type: array
+          example: ["Id", "Number", "StartDate", "EndDate", "Company", "JobRole", "Document", "Type", "Comment"]
+          items:
+            type: string
+        $sort:
+          - type: string
+            example: "Id,Number,StartDate,EndDate,Company,JobRole,Document,Type,Comment"
+        $order:
+          type: string
+          enum: ["asc", "desc"]
+          example: "asc"
+        $offset:
+          type: integer
+          example: 0
+        $limit:
+          type: integer
+          example: 10
+    EmployeeContractItem:
+      type: object
+      required:
+        - Name
+      properties:
+        Id:
+          type: integer
+          format: int32
+        Name:
+          type: string
+          minLength: 0
+          maxLength: 100
+        Document:
+          type: string
+          minLength: 0
+          maxLength: 500
+        EmployeeContract:
+          type: integer
+          format: int32
+    EmployeeContractItemFilterOptions:
+      type: object
+      properties:
+        $filter:
+          type: object
+          properties:
+            equals:
+              type: object
+              properties:
+                Id:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+                Name:
+                  oneOf:
+                    - type: string
+                      minLength: 0
+                      maxLength: 100
+                    - type: array
+                      items:
+                        type: string
+                        format: double
+                        minLength: 0
+                        maxLength: 100
+                Document:
+                  oneOf:
+                    - type: string
+                      minLength: 0
+                      maxLength: 500
+                    - type: array
+                      items:
+                        type: string
+                        format: double
+                        minLength: 0
+                        maxLength: 500
+                EmployeeContract:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+            notEquals:
+              type: object
+              properties:
+                Id:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+                Name:
+                  oneOf:
+                    - type: string
+                      minLength: 0
+                      maxLength: 100
+                    - type: array
+                      items:
+                        type: string
+                        format: double
+                        minLength: 0
+                        maxLength: 100
+                Document:
+                  oneOf:
+                    - type: string
+                      minLength: 0
+                      maxLength: 500
+                    - type: array
+                      items:
+                        type: string
+                        format: double
+                        minLength: 0
+                        maxLength: 500
+                EmployeeContract:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+            contains:
+              type: object
+              properties:
+                Id:
+                Name:
+                  type: string
+                  minLength: 0
+                  maxLength: 100
+                Document:
+                  type: string
+                  minLength: 0
+                  maxLength: 500
+                EmployeeContract:
+            greaterThan:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                  format: int32
+                Name:
+                  type: string
+                  minLength: 0
+                  maxLength: 100
+                Document:
+                  type: string
+                  minLength: 0
+                  maxLength: 500
+                EmployeeContract:
+                  type: integer
+                  format: int32
+            greaterThanOrEqual:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                  format: int32
+                Name:
+                  type: string
+                  minLength: 0
+                  maxLength: 100
+                Document:
+                  type: string
+                  minLength: 0
+                  maxLength: 500
+                EmployeeContract:
+                  type: integer
+                  format: int32
+            lessThan:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                  format: int32
+                Name:
+                  type: string
+                  minLength: 0
+                  maxLength: 100
+                Document:
+                  type: string
+                  minLength: 0
+                  maxLength: 500
+                EmployeeContract:
+                  type: integer
+                  format: int32
+            lessThanOrEqual:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                  format: int32
+                Name:
+                  type: string
+                  minLength: 0
+                  maxLength: 100
+                Document:
+                  type: string
+                  minLength: 0
+                  maxLength: 500
+                EmployeeContract:
+                  type: integer
+                  format: int32
+        $select:
+          type: array
+          example: ["Id", "Name", "Document", "EmployeeContract"]
+          items:
+            type: string
+        $sort:
+          - type: string
+            example: "Id,Name,Document,EmployeeContract"
         $order:
           type: string
           enum: ["asc", "desc"]

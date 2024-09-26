@@ -1,0 +1,5 @@
+{
+    "module": "codbex-contracts/gen/codbex-contracts/ui/EmployeeContracts/EmployeeContract/EmployeeContractItem/view.js",
+    "extensionPoint": "codbex-contracts-view",
+    "description": "codbex-contracts - Application View - Details"
+}

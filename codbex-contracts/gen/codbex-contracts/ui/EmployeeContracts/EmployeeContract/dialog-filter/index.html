@@ -26,7 +26,7 @@
             </div>
 
             <fd-fieldset ng-form="forms.details">
-                <fd-form-group dg-header="Contract Filter" name="entityForm" class="fd-container fd-form-layout-grid-container">
+                <fd-form-group dg-header="EmployeeContract Filter" name="entityForm" class="fd-container fd-form-layout-grid-container">
                     <fd-form-item class="fd-row">
                     	<div class="fd-col fd-col-md--2">
                         	<fd-form-label for="idNumber" dg-colon="true">Number</fd-form-label>
@@ -122,6 +122,20 @@
                     </fd-form-item>
                     <fd-form-item class="fd-row">
                     	<div class="fd-col fd-col-md--2">
+                        	<fd-form-label for="idJobRole" dg-colon="true">JobRole</fd-form-label>
+                        </div>
+                        <div class="fd-col fd-col-md--8">
+	                        <fd-combobox-input id="idJobRole"
+	                            name="JobRole"
+	                            state="{{ forms.details['JobRole'].$valid ? '' : 'error' }}"
+	                            ng-model="entity.JobRole"
+	                            dropdown-items="optionsJobRole"
+	                            dg-placeholder="Search JobRole ...">
+	                        </fd-combobox-input>
+	                    </div>
+                    </fd-form-item>
+                    <fd-form-item class="fd-row">
+                    	<div class="fd-col fd-col-md--2">
                         	<fd-form-label for="idDocument" dg-colon="true">Document</fd-form-label>
                         </div>
                         <div class="fd-col fd-col-md--8">
@@ -164,7 +178,7 @@
 	                                state="{{ forms.details['Comment'].$valid ? '' : 'error' }}"
 	                                ng-model="entity.Comment"
 	                                ng-minlength="0.0 || 0"
-	                                ng-maxlength="1000.0 || -1"
+	                                ng-maxlength="20.0 || -1"
 	                                type="text"
 	                                placeholder="Enter Comment">
 	                            </fd-input>

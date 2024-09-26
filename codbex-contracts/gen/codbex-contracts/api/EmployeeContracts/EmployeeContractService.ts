@@ -1,22 +1,22 @@
 import { Controller, Get, Post, Put, Delete, response } from "sdk/http"
 import { Extensions } from "sdk/extensions"
-import { ContractRepository, ContractEntityOptions } from "../../dao/Contract/ContractRepository";
+import { EmployeeContractRepository, EmployeeContractEntityOptions } from "../../dao/EmployeeContracts/EmployeeContractRepository";
 import { ValidationError } from "../utils/ValidationError";
 import { HttpUtils } from "../utils/HttpUtils";
 // custom imports
 import { NumberGeneratorService } from "/codbex-number-generator/service/generator";
 
-const validationModules = await Extensions.loadExtensionModules("codbex-contracts-Contract-Contract", ["validate"]);
+const validationModules = await Extensions.loadExtensionModules("codbex-contracts-EmployeeContracts-EmployeeContract", ["validate"]);
 
 @Controller
-class ContractService {
+class EmployeeContractService {
 
-    private readonly repository = new ContractRepository();
+    private readonly repository = new EmployeeContractRepository();
 
     @Get("/")
     public getAll(_: any, ctx: any) {
         try {
-            const options: ContractEntityOptions = {
+            const options: EmployeeContractEntityOptions = {
                 $limit: ctx.queryParameters["$limit"] ? parseInt(ctx.queryParameters["$limit"]) : undefined,
                 $offset: ctx.queryParameters["$offset"] ? parseInt(ctx.queryParameters["$offset"]) : undefined
             };
@@ -32,7 +32,7 @@ class ContractService {
         try {
             this.validateEntity(entity);
             entity.Id = this.repository.create(entity);
-            response.setHeader("Content-Location", "/services/ts/codbex-contracts/gen/codbex-contracts/api/Contract/ContractService.ts/" + entity.Id);
+            response.setHeader("Content-Location", "/services/ts/codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractService.ts/" + entity.Id);
             response.setStatus(response.CREATED);
             return entity;
         } catch (error: any) {
@@ -75,7 +75,7 @@ class ContractService {
             if (entity) {
                 return entity;
             } else {
-                HttpUtils.sendResponseNotFound("Contract not found");
+                HttpUtils.sendResponseNotFound("EmployeeContract not found");
             }
         } catch (error: any) {
             this.handleError(error);
@@ -103,7 +103,7 @@ class ContractService {
                 this.repository.deleteById(id);
                 HttpUtils.sendResponseNoContent();
             } else {
-                HttpUtils.sendResponseNotFound("Contract not found");
+                HttpUtils.sendResponseNotFound("EmployeeContract not found");
             }
         } catch (error: any) {
             this.handleError(error);
@@ -132,6 +132,9 @@ class ContractService {
         }
         if (entity.Company === null || entity.Company === undefined) {
             throw new ValidationError(`The 'Company' property is required, provide a valid value`);
+        }
+        if (entity.JobRole === null || entity.JobRole === undefined) {
+            throw new ValidationError(`The 'JobRole' property is required, provide a valid value`);
         }
         if (entity.Document === null || entity.Document === undefined) {
             throw new ValidationError(`The 'Document' property is required, provide a valid value`);

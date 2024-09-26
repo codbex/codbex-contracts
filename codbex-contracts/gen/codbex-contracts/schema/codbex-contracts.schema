@@ -72,6 +72,92 @@
                 ]
             },
             {
+                "name": "CODBEX_EMPLOYEECONTRACT",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACT_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 20,
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACT_NUMBER"
+                    },
+                    {
+                        "type": "DATE",
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACT_STARTDATE"
+                    },
+                    {
+                        "type": "DATE",
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACT_ENDDATE"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACT_COMPANY"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACT_JOBROLE"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 500,
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACT_DOCUMENT"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACT_TYPE"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 1000,
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACT_COMMENT"
+                    }
+                ]
+            },
+            {
+                "name": "CODBEX_EMPLOYEECONTRACTITEM",
+                "type": "TABLE",
+                "columns": [
+                    {
+                        "type": "INTEGER",
+                        "primaryKey": true,
+                        "identity": true,
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACTITEM_ID"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 100,
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACTITEM_NAME"
+                    },
+                    {
+                        "type": "VARCHAR",
+                        "length": 500,
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACTITEM_DOCUMENT"
+                    },
+                    {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACTITEM_EMPLOYEECONTRACT"
+                    }
+                ]
+            },
+            {
                 "name": "Contract_Company",
                 "type": "foreignKey",
                 "table": "CODBEX_CONTRACT",
@@ -88,6 +174,42 @@
                 "columns": "CONTRACT_TYPE",
                 "referencedTable": "CODBEX_CONTRACTTYPE",
                 "referencedColumns": "CONTRACTTYPE_ID"
+            },
+            {
+                "name": "EmployeeContract_Company",
+                "type": "foreignKey",
+                "table": "CODBEX_EMPLOYEECONTRACT",
+                "constraintName": "EmployeeContract_Company",
+                "columns": "EMPLOYEECONTRACT_COMPANY",
+                "referencedTable": "CODBEX_COMPANY",
+                "referencedColumns": "COMPANY_ID"
+            },
+            {
+                "name": "EmployeeContract_JobRole",
+                "type": "foreignKey",
+                "table": "CODBEX_EMPLOYEECONTRACT",
+                "constraintName": "EmployeeContract_JobRole",
+                "columns": "EMPLOYEECONTRACT_JOBROLE",
+                "referencedTable": "CODBEX_JOBROLE",
+                "referencedColumns": "COMPANYROLE_ID"
+            },
+            {
+                "name": "EmployeeContract_ContractType",
+                "type": "foreignKey",
+                "table": "CODBEX_EMPLOYEECONTRACT",
+                "constraintName": "EmployeeContract_ContractType",
+                "columns": "EMPLOYEECONTRACT_TYPE",
+                "referencedTable": "CODBEX_CONTRACTTYPE",
+                "referencedColumns": "CONTRACTTYPE_ID"
+            },
+            {
+                "name": "EmployeeContractItem_EmployeeContract",
+                "type": "foreignKey",
+                "table": "CODBEX_EMPLOYEECONTRACTITEM",
+                "constraintName": "EmployeeContractItem_EmployeeContract",
+                "columns": "EMPLOYEECONTRACTITEM_EMPLOYEECONTRACT",
+                "referencedTable": "CODBEX_EMPLOYEECONTRACT",
+                "referencedColumns": "EMPLOYEECONTRACT_ID"
             }
         ]
     },
