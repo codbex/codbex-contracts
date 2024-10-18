@@ -2,7 +2,7 @@ const navigationData = {
     id: 'contracts-navigation',
     label: "Contracts",
     view: "contracts assignments",
-    group: "configurations",
+    group: "employees",
     orderNumber: 1000,
     lazyLoad: true,
     link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/Contract/index.html?embedded"
