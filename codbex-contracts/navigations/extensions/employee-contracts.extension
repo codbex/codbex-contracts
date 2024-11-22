@@ -1,0 +1,5 @@
+{
+    "extensionPoint": "dashboard-navigations",
+    "module": "codbex-contracts/navigations/services/employee-contracts.js",
+    "description": "Contracts Navigation"
+}
