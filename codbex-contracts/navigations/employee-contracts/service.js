@@ -2,7 +2,7 @@ const navigationData = {
     id: 'employee-contracts-navigation',
     label: "Employee Contracts",
     group: "employees",
-    order: 1000,
+    order: 300,
     link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/EmployeeContracts/index.html?embedded"
 };
 
