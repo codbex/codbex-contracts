@@ -200,7 +200,7 @@ export class ContractRepository {
         EntityUtils.setLocalDate(entity, "StartDate");
         EntityUtils.setLocalDate(entity, "EndDate");
         // @ts-ignore
-        (entity as ContractEntity).Number = new NumberGeneratorService().generate(25);
+        (entity as ContractEntity).Number = new NumberGeneratorService().generate(23);
         const id = this.dao.insert(entity);
         this.triggerEvent({
             operation: "create",

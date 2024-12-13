@@ -214,7 +214,7 @@ export class EmployeeContractRepository {
         EntityUtils.setLocalDate(entity, "StartDate");
         EntityUtils.setLocalDate(entity, "EndDate");
         // @ts-ignore
-        (entity as EmployeeContractEntity).Number = new NumberGeneratorService().generate(30);
+        (entity as EmployeeContractEntity).Number = new NumberGeneratorService().generate(28);
         const id = this.dao.insert(entity);
         this.triggerEvent({
             operation: "create",
