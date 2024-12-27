@@ -40,6 +40,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		messageHub.onDidReceiveMessage("clearDetails", function (msg) {
 			$scope.$apply(function () {
 				$scope.entity = {};
+				$scope.optionsEmployee = [];
 				$scope.optionsCompany = [];
 				$scope.optionsJobRole = [];
 				$scope.optionsType = [];
@@ -56,6 +57,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 					msg.data.entity.EndDate = new Date(msg.data.entity.EndDate);
 				}
 				$scope.entity = msg.data.entity;
+				$scope.optionsEmployee = msg.data.optionsEmployee;
 				$scope.optionsCompany = msg.data.optionsCompany;
 				$scope.optionsJobRole = msg.data.optionsJobRole;
 				$scope.optionsType = msg.data.optionsType;
@@ -66,6 +68,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		messageHub.onDidReceiveMessage("createEntity", function (msg) {
 			$scope.$apply(function () {
 				$scope.entity = {};
+				$scope.optionsEmployee = msg.data.optionsEmployee;
 				$scope.optionsCompany = msg.data.optionsCompany;
 				$scope.optionsJobRole = msg.data.optionsJobRole;
 				$scope.optionsType = msg.data.optionsType;
@@ -82,6 +85,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 					msg.data.entity.EndDate = new Date(msg.data.entity.EndDate);
 				}
 				$scope.entity = msg.data.entity;
+				$scope.optionsEmployee = msg.data.optionsEmployee;
 				$scope.optionsCompany = msg.data.optionsCompany;
 				$scope.optionsJobRole = msg.data.optionsJobRole;
 				$scope.optionsType = msg.data.optionsType;
@@ -89,6 +93,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
+		$scope.serviceEmployee = "/services/ts/codbex-employees/gen/codbex-employees/api/Employees/EmployeeService.ts";
 		$scope.serviceCompany = "/services/ts/codbex-companies/gen/codbex-companies/api/Companies/CompanyService.ts";
 		$scope.serviceJobRole = "/services/ts/codbex-companies/gen/codbex-companies/api/Companies/JobRoleService.ts";
 		$scope.serviceType = "/services/ts/codbex-contracts/gen/codbex-contracts/api/Settings/ContractTypeService.ts";

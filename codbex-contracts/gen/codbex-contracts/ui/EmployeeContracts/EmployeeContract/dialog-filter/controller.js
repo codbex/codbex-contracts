@@ -26,6 +26,7 @@ angular.module('page', ["ideUI", "ideView"])
 			$scope.entity = params.entity ?? {};
 			$scope.selectedMainEntityKey = params.selectedMainEntityKey;
 			$scope.selectedMainEntityId = params.selectedMainEntityId;
+			$scope.optionsEmployee = params.optionsEmployee;
 			$scope.optionsCompany = params.optionsCompany;
 			$scope.optionsJobRole = params.optionsJobRole;
 			$scope.optionsType = params.optionsType;
@@ -56,6 +57,9 @@ angular.module('page', ["ideUI", "ideView"])
 			}
 			if (entity.Number) {
 				filter.$filter.contains.Number = entity.Number;
+			}
+			if (entity.Employee !== undefined) {
+				filter.$filter.equals.Employee = entity.Employee;
 			}
 			if (entity.StartDateFrom) {
 				filter.$filter.greaterThanOrEqual.StartDate = entity.StartDateFrom;

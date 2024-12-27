@@ -9,6 +9,7 @@ import { NumberGeneratorService } from "/codbex-number-generator/service/generat
 export interface EmployeeContractEntity {
     readonly Id: number;
     Number?: string;
+    Employee?: number;
     StartDate?: Date;
     EndDate?: Date;
     Company?: number;
@@ -19,6 +20,7 @@ export interface EmployeeContractEntity {
 }
 
 export interface EmployeeContractCreateEntity {
+    readonly Employee?: number;
     readonly StartDate?: Date;
     readonly EndDate?: Date;
     readonly Company?: number;
@@ -37,6 +39,7 @@ export interface EmployeeContractEntityOptions {
         equals?: {
             Id?: number | number[];
             Number?: string | string[];
+            Employee?: number | number[];
             StartDate?: Date | Date[];
             EndDate?: Date | Date[];
             Company?: number | number[];
@@ -48,6 +51,7 @@ export interface EmployeeContractEntityOptions {
         notEquals?: {
             Id?: number | number[];
             Number?: string | string[];
+            Employee?: number | number[];
             StartDate?: Date | Date[];
             EndDate?: Date | Date[];
             Company?: number | number[];
@@ -59,6 +63,7 @@ export interface EmployeeContractEntityOptions {
         contains?: {
             Id?: number;
             Number?: string;
+            Employee?: number;
             StartDate?: Date;
             EndDate?: Date;
             Company?: number;
@@ -70,6 +75,7 @@ export interface EmployeeContractEntityOptions {
         greaterThan?: {
             Id?: number;
             Number?: string;
+            Employee?: number;
             StartDate?: Date;
             EndDate?: Date;
             Company?: number;
@@ -81,6 +87,7 @@ export interface EmployeeContractEntityOptions {
         greaterThanOrEqual?: {
             Id?: number;
             Number?: string;
+            Employee?: number;
             StartDate?: Date;
             EndDate?: Date;
             Company?: number;
@@ -92,6 +99,7 @@ export interface EmployeeContractEntityOptions {
         lessThan?: {
             Id?: number;
             Number?: string;
+            Employee?: number;
             StartDate?: Date;
             EndDate?: Date;
             Company?: number;
@@ -103,6 +111,7 @@ export interface EmployeeContractEntityOptions {
         lessThanOrEqual?: {
             Id?: number;
             Number?: string;
+            Employee?: number;
             StartDate?: Date;
             EndDate?: Date;
             Company?: number;
@@ -150,6 +159,11 @@ export class EmployeeContractRepository {
                 name: "Number",
                 column: "EMPLOYEECONTRACT_NUMBER",
                 type: "VARCHAR",
+            },
+            {
+                name: "Employee",
+                column: "EMPLOYEECONTRACT_EMPLOYEE",
+                type: "INTEGER",
             },
             {
                 name: "StartDate",
