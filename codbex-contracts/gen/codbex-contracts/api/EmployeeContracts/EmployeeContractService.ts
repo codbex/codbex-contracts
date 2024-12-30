@@ -124,6 +124,9 @@ class EmployeeContractService {
         if (entity.Number?.length > 20) {
             throw new ValidationError(`The 'Number' exceeds the maximum length of [20] characters`);
         }
+        if (entity.Employee === null || entity.Employee === undefined) {
+            throw new ValidationError(`The 'Employee' property is required, provide a valid value`);
+        }
         if (entity.StartDate === null || entity.StartDate === undefined) {
             throw new ValidationError(`The 'StartDate' property is required, provide a valid value`);
         }
@@ -141,6 +144,9 @@ class EmployeeContractService {
         }
         if (entity.Document?.length > 500) {
             throw new ValidationError(`The 'Document' exceeds the maximum length of [500] characters`);
+        }
+        if (entity.Type === null || entity.Type === undefined) {
+            throw new ValidationError(`The 'Type' property is required, provide a valid value`);
         }
         if (entity.Comment?.length > 1000) {
             throw new ValidationError(`The 'Comment' exceeds the maximum length of [1000] characters`);

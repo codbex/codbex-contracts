@@ -2074,11 +2074,13 @@ components:
     EmployeeContract:
       type: object
       required:
+        - Employee
         - StartDate
         - EndDate
         - Company
         - JobRole
         - Document
+        - Type
       properties:
         Id:
           type: integer
