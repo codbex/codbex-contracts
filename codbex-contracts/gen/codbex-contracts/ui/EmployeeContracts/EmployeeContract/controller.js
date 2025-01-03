@@ -122,6 +122,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			messageHub.postMessage("entitySelected", {
 				entity: entity,
 				selectedMainEntityId: entity.Id,
+				optionsEmployee: $scope.optionsEmployee,
 				optionsCompany: $scope.optionsCompany,
 				optionsJobRole: $scope.optionsJobRole,
 				optionsType: $scope.optionsType,
@@ -134,6 +135,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 
 			messageHub.postMessage("createEntity", {
 				entity: {},
+				optionsEmployee: $scope.optionsEmployee,
 				optionsCompany: $scope.optionsCompany,
 				optionsJobRole: $scope.optionsJobRole,
 				optionsType: $scope.optionsType,
@@ -144,6 +146,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			$scope.action = "update";
 			messageHub.postMessage("updateEntity", {
 				entity: $scope.selectedEntity,
+				optionsEmployee: $scope.optionsEmployee,
 				optionsCompany: $scope.optionsCompany,
 				optionsJobRole: $scope.optionsJobRole,
 				optionsType: $scope.optionsType,
@@ -183,6 +186,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.openFilter = function (entity) {
 			messageHub.showDialogWindow("EmployeeContract-filter", {
 				entity: $scope.filterEntity,
+				optionsEmployee: $scope.optionsEmployee,
 				optionsCompany: $scope.optionsCompany,
 				optionsJobRole: $scope.optionsJobRole,
 				optionsType: $scope.optionsType,
@@ -190,10 +194,20 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		};
 
 		//----------------Dropdowns-----------------//
+		$scope.optionsEmployee = [];
 		$scope.optionsCompany = [];
 		$scope.optionsJobRole = [];
 		$scope.optionsType = [];
 
+
+		$http.get("/services/ts/codbex-employees/gen/codbex-employees/api/Employees/EmployeeService.ts").then(function (response) {
+			$scope.optionsEmployee = response.data.map(e => {
+				return {
+					value: e.Id,
+					text: e.Name
+				}
+			});
+		});
 
 		$http.get("/services/ts/codbex-companies/gen/codbex-companies/api/Companies/CompanyService.ts").then(function (response) {
 			$scope.optionsCompany = response.data.map(e => {
@@ -222,6 +236,14 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			});
 		});
 
+		$scope.optionsEmployeeValue = function (optionKey) {
+			for (let i = 0; i < $scope.optionsEmployee.length; i++) {
+				if ($scope.optionsEmployee[i].value === optionKey) {
+					return $scope.optionsEmployee[i].text;
+				}
+			}
+			return null;
+		};
 		$scope.optionsCompanyValue = function (optionKey) {
 			for (let i = 0; i < $scope.optionsCompany.length; i++) {
 				if ($scope.optionsCompany[i].value === optionKey) {

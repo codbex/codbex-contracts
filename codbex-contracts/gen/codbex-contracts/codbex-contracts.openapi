@@ -2074,11 +2074,13 @@ components:
     EmployeeContract:
       type: object
       required:
+        - Employee
         - StartDate
         - EndDate
         - Company
         - JobRole
         - Document
+        - Type
       properties:
         Id:
           type: integer
@@ -2088,6 +2090,9 @@ components:
           minLength: 0
           maxLength: 20
           readOnly: true
+        Employee:
+          type: integer
+          format: int32
         StartDate:
         EndDate:
         Company:
@@ -2135,6 +2140,14 @@ components:
                         format: double
                         minLength: 0
                         maxLength: 20
+                Employee:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
                 StartDate:
                   oneOf:
                 EndDate:
@@ -2207,6 +2220,14 @@ components:
                         format: double
                         minLength: 0
                         maxLength: 20
+                Employee:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
                 StartDate:
                   oneOf:
                 EndDate:
@@ -2265,6 +2286,7 @@ components:
                   type: string
                   minLength: 0
                   maxLength: 20
+                Employee:
                 StartDate:
                 EndDate:
                 Company:
@@ -2288,6 +2310,9 @@ components:
                   type: string
                   minLength: 0
                   maxLength: 20
+                Employee:
+                  type: integer
+                  format: int32
                 StartDate:
                 EndDate:
                 Company:
@@ -2317,6 +2342,9 @@ components:
                   type: string
                   minLength: 0
                   maxLength: 20
+                Employee:
+                  type: integer
+                  format: int32
                 StartDate:
                 EndDate:
                 Company:
@@ -2346,6 +2374,9 @@ components:
                   type: string
                   minLength: 0
                   maxLength: 20
+                Employee:
+                  type: integer
+                  format: int32
                 StartDate:
                 EndDate:
                 Company:
@@ -2375,6 +2406,9 @@ components:
                   type: string
                   minLength: 0
                   maxLength: 20
+                Employee:
+                  type: integer
+                  format: int32
                 StartDate:
                 EndDate:
                 Company:
@@ -2396,12 +2430,12 @@ components:
                   maxLength: 1000
         $select:
           type: array
-          example: ["Id", "Number", "StartDate", "EndDate", "Company", "JobRole", "Document", "Type", "Comment"]
+          example: ["Id", "Number", "Employee", "StartDate", "EndDate", "Company", "JobRole", "Document", "Type", "Comment"]
           items:
             type: string
         $sort:
           - type: string
-            example: "Id,Number,StartDate,EndDate,Company,JobRole,Document,Type,Comment"
+            example: "Id,Number,Employee,StartDate,EndDate,Company,JobRole,Document,Type,Comment"
         $order:
           type: string
           enum: ["asc", "desc"]
