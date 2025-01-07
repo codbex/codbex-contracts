@@ -593,6 +593,19 @@
                         "relationshipEntityPerspectiveLabel": "Companies"
                     },
                     {
+                        "dataName": "EMPLOYEECONTRACT_ANNUALPAIDLEAVE",
+                        "dataNullable": "true",
+                        "dataType": "INTEGER",
+                        "description": "",
+                        "isRequiredProperty": "true",
+                        "name": "AnnualPaidLeave",
+                        "tooltip": "",
+                        "widgetIsMajor": "true",
+                        "widgetLength": "20",
+                        "widgetSize": "",
+                        "widgetType": "NUMBER"
+                    },
+                    {
                         "dataLength": "500",
                         "dataName": "EMPLOYEECONTRACT_DOCUMENT",
                         "dataNullable": "true",

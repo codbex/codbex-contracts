@@ -114,6 +114,11 @@
                         "name": "EMPLOYEECONTRACT_JOBROLE"
                     },
                     {
+                        "type": "INTEGER",
+                        "nullable": true,
+                        "name": "EMPLOYEECONTRACT_ANNUALPAIDLEAVE"
+                    },
+                    {
                         "type": "VARCHAR",
                         "length": 500,
                         "nullable": true,
