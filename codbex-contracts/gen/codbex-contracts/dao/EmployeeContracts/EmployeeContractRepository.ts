@@ -14,6 +14,7 @@ export interface EmployeeContractEntity {
     EndDate?: Date;
     Company?: number;
     JobRole?: number;
+    AnnualPaidLeave?: number;
     Document?: string;
     Type?: number;
     Comment?: string;
@@ -25,6 +26,7 @@ export interface EmployeeContractCreateEntity {
     readonly EndDate?: Date;
     readonly Company?: number;
     readonly JobRole?: number;
+    readonly AnnualPaidLeave?: number;
     readonly Document?: string;
     readonly Type?: number;
     readonly Comment?: string;
@@ -44,6 +46,7 @@ export interface EmployeeContractEntityOptions {
             EndDate?: Date | Date[];
             Company?: number | number[];
             JobRole?: number | number[];
+            AnnualPaidLeave?: number | number[];
             Document?: string | string[];
             Type?: number | number[];
             Comment?: string | string[];
@@ -56,6 +59,7 @@ export interface EmployeeContractEntityOptions {
             EndDate?: Date | Date[];
             Company?: number | number[];
             JobRole?: number | number[];
+            AnnualPaidLeave?: number | number[];
             Document?: string | string[];
             Type?: number | number[];
             Comment?: string | string[];
@@ -68,6 +72,7 @@ export interface EmployeeContractEntityOptions {
             EndDate?: Date;
             Company?: number;
             JobRole?: number;
+            AnnualPaidLeave?: number;
             Document?: string;
             Type?: number;
             Comment?: string;
@@ -80,6 +85,7 @@ export interface EmployeeContractEntityOptions {
             EndDate?: Date;
             Company?: number;
             JobRole?: number;
+            AnnualPaidLeave?: number;
             Document?: string;
             Type?: number;
             Comment?: string;
@@ -92,6 +98,7 @@ export interface EmployeeContractEntityOptions {
             EndDate?: Date;
             Company?: number;
             JobRole?: number;
+            AnnualPaidLeave?: number;
             Document?: string;
             Type?: number;
             Comment?: string;
@@ -104,6 +111,7 @@ export interface EmployeeContractEntityOptions {
             EndDate?: Date;
             Company?: number;
             JobRole?: number;
+            AnnualPaidLeave?: number;
             Document?: string;
             Type?: number;
             Comment?: string;
@@ -116,6 +124,7 @@ export interface EmployeeContractEntityOptions {
             EndDate?: Date;
             Company?: number;
             JobRole?: number;
+            AnnualPaidLeave?: number;
             Document?: string;
             Type?: number;
             Comment?: string;
@@ -183,6 +192,11 @@ export class EmployeeContractRepository {
             {
                 name: "JobRole",
                 column: "EMPLOYEECONTRACT_JOBROLE",
+                type: "INTEGER",
+            },
+            {
+                name: "AnnualPaidLeave",
+                column: "EMPLOYEECONTRACT_ANNUALPAIDLEAVE",
                 type: "INTEGER",
             },
             {

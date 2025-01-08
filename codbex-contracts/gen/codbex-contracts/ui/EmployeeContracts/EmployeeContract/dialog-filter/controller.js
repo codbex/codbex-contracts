@@ -79,6 +79,9 @@ angular.module('page', ["ideUI", "ideView"])
 			if (entity.JobRole !== undefined) {
 				filter.$filter.equals.JobRole = entity.JobRole;
 			}
+			if (entity.AnnualPaidLeave !== undefined) {
+				filter.$filter.equals.AnnualPaidLeave = entity.AnnualPaidLeave;
+			}
 			if (entity.Document) {
 				filter.$filter.contains.Document = entity.Document;
 			}

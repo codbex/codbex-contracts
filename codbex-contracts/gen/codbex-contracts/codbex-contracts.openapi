@@ -2079,6 +2079,7 @@ components:
         - EndDate
         - Company
         - JobRole
+        - AnnualPaidLeave
         - Document
         - Type
       properties:
@@ -2099,6 +2100,9 @@ components:
           type: integer
           format: int32
         JobRole:
+          type: integer
+          format: int32
+        AnnualPaidLeave:
           type: integer
           format: int32
         Document:
@@ -2161,6 +2165,14 @@ components:
                         type: integer
                         format: int32
                 JobRole:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
+                AnnualPaidLeave:
                   oneOf:
                     - type: integer
                       format: int32
@@ -2248,6 +2260,14 @@ components:
                       items:
                         type: integer
                         format: int32
+                AnnualPaidLeave:
+                  oneOf:
+                    - type: integer
+                      format: int32
+                    - type: array
+                      items:
+                        type: integer
+                        format: int32
                 Document:
                   oneOf:
                     - type: string
@@ -2291,6 +2311,7 @@ components:
                 EndDate:
                 Company:
                 JobRole:
+                AnnualPaidLeave:
                 Document:
                   type: string
                   minLength: 0
@@ -2319,6 +2340,9 @@ components:
                   type: integer
                   format: int32
                 JobRole:
+                  type: integer
+                  format: int32
+                AnnualPaidLeave:
                   type: integer
                   format: int32
                 Document:
@@ -2353,6 +2377,9 @@ components:
                 JobRole:
                   type: integer
                   format: int32
+                AnnualPaidLeave:
+                  type: integer
+                  format: int32
                 Document:
                   type: string
                   minLength: 0
@@ -2383,6 +2410,9 @@ components:
                   type: integer
                   format: int32
                 JobRole:
+                  type: integer
+                  format: int32
+                AnnualPaidLeave:
                   type: integer
                   format: int32
                 Document:
@@ -2417,6 +2447,9 @@ components:
                 JobRole:
                   type: integer
                   format: int32
+                AnnualPaidLeave:
+                  type: integer
+                  format: int32
                 Document:
                   type: string
                   minLength: 0
@@ -2430,12 +2463,12 @@ components:
                   maxLength: 1000
         $select:
           type: array
-          example: ["Id", "Number", "Employee", "StartDate", "EndDate", "Company", "JobRole", "Document", "Type", "Comment"]
+          example: ["Id", "Number", "Employee", "StartDate", "EndDate", "Company", "JobRole", "AnnualPaidLeave", "Document", "Type", "Comment"]
           items:
             type: string
         $sort:
           - type: string
-            example: "Id,Number,Employee,StartDate,EndDate,Company,JobRole,Document,Type,Comment"
+            example: "Id,Number,Employee,StartDate,EndDate,Company,JobRole,AnnualPaidLeave,Document,Type,Comment"
         $order:
           type: string
           enum: ["asc", "desc"]

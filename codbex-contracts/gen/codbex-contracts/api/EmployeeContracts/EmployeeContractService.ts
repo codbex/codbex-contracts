@@ -139,6 +139,9 @@ class EmployeeContractService {
         if (entity.JobRole === null || entity.JobRole === undefined) {
             throw new ValidationError(`The 'JobRole' property is required, provide a valid value`);
         }
+        if (entity.AnnualPaidLeave === null || entity.AnnualPaidLeave === undefined) {
+            throw new ValidationError(`The 'AnnualPaidLeave' property is required, provide a valid value`);
+        }
         if (entity.Document === null || entity.Document === undefined) {
             throw new ValidationError(`The 'Document' property is required, provide a valid value`);
         }
