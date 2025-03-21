@@ -1,0 +1,34 @@
+[
+    {
+        "name": "codbex-contracts.Contract.ContractReadOnly",
+        "description": "A role that grants read only permission for Contract."
+    },
+    {
+        "name": "codbex-contracts.Contract.ContractFullAccess",
+        "description": "A role that grants full access for Contract."
+    },
+    {
+        "name": "codbex-contracts.Settings.ContractTypeReadOnly",
+        "description": "A role that grants read only permission for ContractType."
+    },
+    {
+        "name": "codbex-contracts.Settings.ContractTypeFullAccess",
+        "description": "A role that grants full access for ContractType."
+    },
+    {
+        "name": "codbex-contracts.EmployeeContracts.EmployeeContractReadOnly",
+        "description": "A role that grants read only permission for EmployeeContract."
+    },
+    {
+        "name": "codbex-contracts.EmployeeContracts.EmployeeContractFullAccess",
+        "description": "A role that grants full access for EmployeeContract."
+    },
+    {
+        "name": "codbex-contracts.EmployeeContracts.EmployeeContractItemReadOnly",
+        "description": "A role that grants read only permission for EmployeeContractItem."
+    },
+    {
+        "name": "codbex-contracts.EmployeeContracts.EmployeeContractItemFullAccess",
+        "description": "A role that grants full access for EmployeeContractItem."
+    }
+]

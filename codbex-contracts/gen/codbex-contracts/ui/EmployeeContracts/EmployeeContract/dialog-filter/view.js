@@ -7,7 +7,7 @@ const viewData = {
     id: "EmployeeContract-filter",
     label: "EmployeeContract Filter",
     link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/EmployeeContracts/EmployeeContract/dialog-filter/index.html",
-    perspectiveName: "EmployeeContracts",
+    perspectiveName: "EmployeeContracts"
 };
 
 if (typeof exports !== 'undefined') {

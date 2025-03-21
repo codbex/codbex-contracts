@@ -9,7 +9,7 @@ const viewData = {
     factory: "frame",
     region: "left",
     link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/EmployeeContracts/EmployeeContract/index.html",
-    perspectiveName: "EmployeeContracts",
+    perspectiveName: "EmployeeContracts"
 };
 
 if (typeof exports !== 'undefined') {

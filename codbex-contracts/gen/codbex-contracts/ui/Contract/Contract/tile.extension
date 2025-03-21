@@ -1,1 +1,6 @@
-{"module":"codbex-contracts/gen/codbex-contracts/ui/Contract/Contract/tile.js","extensionPoint":"codbex-contracts-tile","description":"codbex-contracts - Application Tile"}
+{
+    "module": "codbex-contracts/gen/codbex-contracts/ui/Contract/Contract/tile.js",
+    "extensionPoint": "codbex-contracts-tile",
+    "description": "codbex-contracts - Application Tile",
+    "role": "codbex-contracts.Contract.ContractReadOnly,codbex-contracts.Contract.ContractFullAccess"
+}

@@ -4,10 +4,13 @@
  * Do not modify the content as it may be re-generated again.
  */
 const viewData = {
-    id: "Contract-filter",
-    label: "Contract Filter",
-    link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/Contract/Contract/dialog-filter/index.html",
-    perspectiveName: "Contract"
+    id: "Contract-details",
+    label: "Contract",
+    link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/Contract/Contract/dialog-window/index.html",
+    perspectiveName: "Contract",
+    roles: [
+        "codbex-contracts.Contract.ContractReadOnly",
+    ]
 };
 
 if (typeof exports !== 'undefined') {
