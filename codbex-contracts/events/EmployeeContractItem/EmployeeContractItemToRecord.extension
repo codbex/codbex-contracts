@@ -1,5 +1,6 @@
 {
     "module": "codbex-contracts/events/EmployeeContractItem/EmployeeContractItemToRecordHandler.ts",
     "extensionPoint": "codbex-contracts-EmployeeContracts-EmployeeContract",
-    "description": "Employee contract Extension"
+    "description": "Employee contract Extension",
+    "role": ""
 }

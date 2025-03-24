@@ -7,7 +7,7 @@ const viewData = {
     id: "ContractType-filter",
     label: "ContractType Filter",
     link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/Settings/ContractType/dialog-filter/index.html",
-    perspectiveName: "Settings",
+    perspectiveName: "Settings"
 };
 
 if (typeof exports !== 'undefined') {

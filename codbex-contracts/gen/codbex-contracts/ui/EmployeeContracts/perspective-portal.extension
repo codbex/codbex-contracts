@@ -1,1 +1,5 @@
-{"module":"codbex-contracts/gen/codbex-contracts/ui/EmployeeContracts/perspective.js","extensionPoint":"portal","description":"codbex-contracts - Perspective - EmployeeContracts"}
+{
+    "module": "codbex-contracts/gen/codbex-contracts/ui/EmployeeContracts/perspective.js",
+    "extensionPoint": "portal",
+    "description": "codbex-contracts - Perspective - EmployeeContracts"
+}

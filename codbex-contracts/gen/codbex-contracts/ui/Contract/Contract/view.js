@@ -9,7 +9,7 @@ const viewData = {
     factory: "frame",
     region: "left",
     link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/Contract/Contract/index.html",
-    perspectiveName: "Contract",
+    perspectiveName: "Contract"
 };
 
 if (typeof exports !== 'undefined') {

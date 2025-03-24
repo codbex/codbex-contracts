@@ -159,7 +159,7 @@ export class ContractRepository {
             },
             {
                 name: "Document",
-                column: "CONTRACT_URL",
+                column: "CONTRACT_DOCUMENT",
                 type: "VARCHAR",
             },
             {

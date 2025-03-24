@@ -37,7 +37,7 @@
                         "type": "VARCHAR",
                         "length": 500,
                         "nullable": true,
-                        "name": "CONTRACT_URL"
+                        "name": "CONTRACT_DOCUMENT"
                     },
                     {
                         "type": "INTEGER",

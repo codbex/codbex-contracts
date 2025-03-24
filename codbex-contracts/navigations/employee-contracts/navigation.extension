@@ -1,5 +1,6 @@
 {
     "extensionPoint": "dashboard-navigations",
     "module": "codbex-contracts/navigations/employee-contracts/service.js",
-    "description": "Contracts Navigation"
+    "description": "Contracts Navigation",
+    "role": "codbex-contracts.EmployeeContracts.EmployeeContractReadOnly,codbex-contracts.EmployeeContracts.EmployeeContractFullAccess"
 }
