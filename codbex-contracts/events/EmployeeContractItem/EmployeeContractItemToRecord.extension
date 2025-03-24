@@ -2,5 +2,5 @@
     "module": "codbex-contracts/events/EmployeeContractItem/EmployeeContractItemToRecordHandler.ts",
     "extensionPoint": "codbex-contracts-EmployeeContracts-EmployeeContract",
     "description": "Employee contract Extension",
-    "role": "codbex-contracts.EmployeeContracts.EmployeeContractReadOnly,codbex-contracts.EmployeeContracts.EmployeeContractFullAccess,codbex-contracts.EmployeeContracts.EmployeeContractItemReadOnly,codbex-contracts.EmployeeContracts.EmployeeContractItemFullAccess"
+    "role": ""
 }
