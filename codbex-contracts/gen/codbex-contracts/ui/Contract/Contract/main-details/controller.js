@@ -1,136 +1,175 @@
-angular.module('page', ["ideUI", "ideView", "entityApi"])
-	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'codbex-contracts.Contract.Contract';
+angular.module('page', ['blimpKit', 'platformView', 'platformLocale', 'EntityService'])
+	.config(["EntityServiceProvider", (EntityServiceProvider) => {
+		EntityServiceProvider.baseUrl = '/services/ts/codbex-contracts/gen/codbex-contracts/api/Contract/ContractService.ts';
 	}])
-	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/ts/codbex-contracts/gen/codbex-contracts/api/Contract/ContractService.ts";
-	}])
-	.controller('PageController', ['$scope',  '$http', 'Extensions', 'messageHub', 'entityApi', function ($scope,  $http, Extensions, messageHub, entityApi) {
-
+	.controller('PageController', ($scope, $http, Extensions, LocaleService, EntityService) => {
+		const Dialogs = new DialogHub();
+		const Notifications = new NotificationHub();
+		let description = 'Description';
+		let propertySuccessfullyCreated = 'Contract successfully created';
+		let propertySuccessfullyUpdated = 'Contract successfully updated';
 		$scope.entity = {};
 		$scope.forms = {
 			details: {},
 		};
 		$scope.formHeaders = {
-			select: "Contract Details",
-			create: "Create Contract",
-			update: "Update Contract"
+			select: 'Contract Details',
+			create: 'Create Contract',
+			update: 'Update Contract'
 		};
 		$scope.action = 'select';
 
-		//-----------------Custom Actions-------------------//
-		Extensions.get('dialogWindow', 'codbex-contracts-custom-action').then(function (response) {
-			$scope.entityActions = response.filter(e => e.perspective === "Contract" && e.view === "Contract" && e.type === "entity");
+		LocaleService.onInit(() => {
+			description = LocaleService.t('codbex-contracts:codbex-contracts-model.defaults.description');
+			$scope.formHeaders.select = LocaleService.t('codbex-contracts:codbex-contracts-model.defaults.formHeadSelect', { name: '$t(codbex-contracts:codbex-contracts-model.t.CONTRACT)' });
+			$scope.formHeaders.create = LocaleService.t('codbex-contracts:codbex-contracts-model.defaults.formHeadCreate', { name: '$t(codbex-contracts:codbex-contracts-model.t.CONTRACT)' });
+			$scope.formHeaders.update = LocaleService.t('codbex-contracts:codbex-contracts-model.defaults.formHeadUpdate', { name: '$t(codbex-contracts:codbex-contracts-model.t.CONTRACT)' });
+			propertySuccessfullyCreated = LocaleService.t('codbex-contracts:codbex-contracts-model.messages.propertySuccessfullyCreated', { name: '$t(codbex-contracts:codbex-contracts-model.t.CONTRACT)' });
+			propertySuccessfullyUpdated = LocaleService.t('codbex-contracts:codbex-contracts-model.messages.propertySuccessfullyUpdated', { name: '$t(codbex-contracts:codbex-contracts-model.t.CONTRACT)' });
 		});
 
-		$scope.triggerEntityAction = function (action) {
-			messageHub.showDialogWindow(
-				action.id,
-				{
+		//-----------------Custom Actions-------------------//
+		Extensions.getWindows(['codbex-contracts-custom-action']).then((response) => {
+			$scope.entityActions = response.data.filter(e => e.perspective === 'Contract' && e.view === 'Contract' && e.type === 'entity');
+		});
+
+		$scope.triggerEntityAction = (action) => {
+			Dialogs.showWindow({
+				hasHeader: true,
+        		title: LocaleService.t(action.translation.key, action.translation.options, action.label),
+				path: action.path,
+				params: {
 					id: $scope.entity.Id
 				},
-				null,
-				true,
-				action
-			);
+				closeButton: true
+			});
 		};
 		//-----------------Custom Actions-------------------//
 
 		//-----------------Events-------------------//
-		messageHub.onDidReceiveMessage("clearDetails", function (msg) {
-			$scope.$apply(function () {
+		Dialogs.addMessageListener({ topic: 'codbex-contracts.Contract.Contract.clearDetails', handler: () => {
+			$scope.$evalAsync(() => {
 				$scope.entity = {};
 				$scope.optionsCompany = [];
 				$scope.optionsType = [];
 				$scope.action = 'select';
 			});
-		});
-
-		messageHub.onDidReceiveMessage("entitySelected", function (msg) {
-			$scope.$apply(function () {
-				if (msg.data.entity.StartDate) {
-					msg.data.entity.StartDate = new Date(msg.data.entity.StartDate);
+		}});
+		Dialogs.addMessageListener({ topic: 'codbex-contracts.Contract.Contract.entitySelected', handler: (data) => {
+			$scope.$evalAsync(() => {
+				if (data.entity.StartDate) {
+					data.entity.StartDate = new Date(data.entity.StartDate);
 				}
-				if (msg.data.entity.EndDate) {
-					msg.data.entity.EndDate = new Date(msg.data.entity.EndDate);
+				if (data.entity.EndDate) {
+					data.entity.EndDate = new Date(data.entity.EndDate);
 				}
-				$scope.entity = msg.data.entity;
-				$scope.optionsCompany = msg.data.optionsCompany;
-				$scope.optionsType = msg.data.optionsType;
+				$scope.entity = data.entity;
+				$scope.optionsCompany = data.optionsCompany;
+				$scope.optionsType = data.optionsType;
 				$scope.action = 'select';
 			});
-		});
-
-		messageHub.onDidReceiveMessage("createEntity", function (msg) {
-			$scope.$apply(function () {
+		}});
+		Dialogs.addMessageListener({ topic: 'codbex-contracts.Contract.Contract.createEntity', handler: (data) => {
+			$scope.$evalAsync(() => {
 				$scope.entity = {};
-				$scope.optionsCompany = msg.data.optionsCompany;
-				$scope.optionsType = msg.data.optionsType;
+				$scope.optionsCompany = data.optionsCompany;
+				$scope.optionsType = data.optionsType;
 				$scope.action = 'create';
 			});
-		});
-
-		messageHub.onDidReceiveMessage("updateEntity", function (msg) {
-			$scope.$apply(function () {
-				if (msg.data.entity.StartDate) {
-					msg.data.entity.StartDate = new Date(msg.data.entity.StartDate);
+		}});
+		Dialogs.addMessageListener({ topic: 'codbex-contracts.Contract.Contract.updateEntity', handler: (data) => {
+			$scope.$evalAsync(() => {
+				if (data.entity.StartDate) {
+					data.entity.StartDate = new Date(data.entity.StartDate);
 				}
-				if (msg.data.entity.EndDate) {
-					msg.data.entity.EndDate = new Date(msg.data.entity.EndDate);
+				if (data.entity.EndDate) {
+					data.entity.EndDate = new Date(data.entity.EndDate);
 				}
-				$scope.entity = msg.data.entity;
-				$scope.optionsCompany = msg.data.optionsCompany;
-				$scope.optionsType = msg.data.optionsType;
+				$scope.entity = data.entity;
+				$scope.optionsCompany = data.optionsCompany;
+				$scope.optionsType = data.optionsType;
 				$scope.action = 'update';
 			});
-		});
+		}});
 
-		$scope.serviceCompany = "/services/ts/codbex-companies/gen/codbex-companies/api/Companies/CompanyService.ts";
-		$scope.serviceType = "/services/ts/codbex-contracts/gen/codbex-contracts/api/Settings/ContractTypeService.ts";
+		$scope.serviceCompany = '/services/ts/codbex-companies/gen/codbex-companies/api/Companies/CompanyService.ts';
+		$scope.serviceType = '/services/ts/codbex-contracts/gen/codbex-contracts/api/Settings/ContractTypeService.ts';
 
 		//-----------------Events-------------------//
 
-		$scope.create = function () {
-			entityApi.create($scope.entity).then(function (response) {
-				if (response.status != 201) {
-					messageHub.showAlertError("Contract", `Unable to create Contract: '${response.message}'`);
-					return;
-				}
-				messageHub.postMessage("entityCreated", response.data);
-				messageHub.postMessage("clearDetails", response.data);
-				messageHub.showAlertSuccess("Contract", "Contract successfully created");
+		$scope.create = () => {
+			EntityService.create($scope.entity).then((response) => {
+				Dialogs.postMessage({ topic: 'codbex-contracts.Contract.Contract.entityCreated', data: response.data });
+				Dialogs.postMessage({ topic: 'codbex-contracts.Contract.Contract.clearDetails' , data: response.data });
+				Notifications.show({
+					title: LocaleService.t('codbex-contracts:codbex-contracts-model.t.CONTRACT'),
+					description: propertySuccessfullyCreated,
+					type: 'positive'
+				});
+			}, (error) => {
+				const message = error.data ? error.data.message : '';
+				Dialogs.showAlert({
+					title: LocaleService.t('codbex-contracts:codbex-contracts-model.t.CONTRACT'),
+					message: LocaleService.t('codbex-contracts:codbex-contracts-model.messages.error.unableToCreate', { name: '$t(codbex-contracts:codbex-contracts-model.t.CONTRACT)', message: message }),
+					type: AlertTypes.Error
+				});
+				console.error('EntityService:', error);
 			});
 		};
 
-		$scope.update = function () {
-			entityApi.update($scope.entity.Id, $scope.entity).then(function (response) {
-				if (response.status != 200) {
-					messageHub.showAlertError("Contract", `Unable to update Contract: '${response.message}'`);
-					return;
-				}
-				messageHub.postMessage("entityUpdated", response.data);
-				messageHub.postMessage("clearDetails", response.data);
-				messageHub.showAlertSuccess("Contract", "Contract successfully updated");
+		$scope.update = () => {
+			EntityService.update($scope.entity.Id, $scope.entity).then((response) => {
+				Dialogs.postMessage({ topic: 'codbex-contracts.Contract.Contract.entityUpdated', data: response.data });
+				Dialogs.postMessage({ topic: 'codbex-contracts.Contract.Contract.clearDetails', data: response.data });
+				Notifications.show({
+					title: LocaleService.t('codbex-contracts:codbex-contracts-model.t.CONTRACT'),
+					description: propertySuccessfullyUpdated,
+					type: 'positive'
+				});
+			}, (error) => {
+				const message = error.data ? error.data.message : '';
+				Dialogs.showAlert({
+					title: LocaleService.t('codbex-contracts:codbex-contracts-model.t.CONTRACT'),
+					message: LocaleService.t('codbex-contracts:codbex-contracts-model.messages.error.unableToCreate', { name: '$t(codbex-contracts:codbex-contracts-model.t.CONTRACT)', message: message }),
+					type: AlertTypes.Error
+				});
+				console.error('EntityService:', error);
 			});
 		};
 
-		$scope.cancel = function () {
-			messageHub.postMessage("clearDetails");
+		$scope.cancel = () => {
+			Dialogs.triggerEvent('codbex-contracts.Contract.Contract.clearDetails');
 		};
 		
 		//-----------------Dialogs-------------------//
-		
-		$scope.createCompany = function () {
-			messageHub.showDialogWindow("Company-details", {
-				action: "create",
-				entity: {},
-			}, null, false);
+		$scope.alert = (message) => {
+			if (message) Dialogs.showAlert({
+				title: description,
+				message: message,
+				type: AlertTypes.Information,
+				preformatted: true,
+			});
 		};
-		$scope.createType = function () {
-			messageHub.showDialogWindow("ContractType-details", {
-				action: "create",
-				entity: {},
-			}, null, false);
+		
+		$scope.createCompany = () => {
+			Dialogs.showWindow({
+				id: 'Company-details',
+				params: {
+					action: 'create',
+					entity: {},
+				},
+				closeButton: false
+			});
+		};
+		$scope.createType = () => {
+			Dialogs.showWindow({
+				id: 'ContractType-details',
+				params: {
+					action: 'create',
+					entity: {},
+				},
+				closeButton: false
+			});
 		};
 
 		//-----------------Dialogs-------------------//
@@ -139,30 +178,40 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 
 		//----------------Dropdowns-----------------//
 
-		$scope.refreshCompany = function () {
+		$scope.refreshCompany = () => {
 			$scope.optionsCompany = [];
-			$http.get("/services/ts/codbex-companies/gen/codbex-companies/api/Companies/CompanyService.ts").then(function (response) {
-				$scope.optionsCompany = response.data.map(e => {
-					return {
-						value: e.Id,
-						text: e.Name
-					}
+			$http.get('/services/ts/codbex-companies/gen/codbex-companies/api/Companies/CompanyService.ts').then((response) => {
+				$scope.optionsCompany = response.data.map(e => ({
+					value: e.Id,
+					text: e.Name
+				}));
+			}, (error) => {
+				console.error(error);
+				const message = error.data ? error.data.message : '';
+				Dialogs.showAlert({
+					title: 'Company',
+					message: LocaleService.t('codbex-contracts:codbex-contracts-model.messages.error.unableToLoad', { message: message }),
+					type: AlertTypes.Error
 				});
 			});
 		};
-		$scope.refreshType = function () {
+		$scope.refreshType = () => {
 			$scope.optionsType = [];
-			$http.get("/services/ts/codbex-contracts/gen/codbex-contracts/api/Settings/ContractTypeService.ts").then(function (response) {
-				$scope.optionsType = response.data.map(e => {
-					return {
-						value: e.Id,
-						text: e.Name
-					}
+			$http.get('/services/ts/codbex-contracts/gen/codbex-contracts/api/Settings/ContractTypeService.ts').then((response) => {
+				$scope.optionsType = response.data.map(e => ({
+					value: e.Id,
+					text: e.Name
+				}));
+			}, (error) => {
+				console.error(error);
+				const message = error.data ? error.data.message : '';
+				Dialogs.showAlert({
+					title: 'Type',
+					message: LocaleService.t('codbex-contracts:codbex-contracts-model.messages.error.unableToLoad', { message: message }),
+					type: AlertTypes.Error
 				});
 			});
 		};
 
 		//----------------Dropdowns-----------------//	
-		
-
-	}]);
+	});

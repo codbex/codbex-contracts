@@ -1,6 +1,6 @@
 {
-    "module": "{{projectName}}/gen/{{genFolderName}}/ui/{{perspectiveName}}/{{name}}/dialog-window/view.js",
-    "extensionPoint": "dialog-window",
-    "description": "{{projectName}} - Application Dialog Window",
+    "module": "codbex-contracts/gen/codbex-contracts/ui/Contract/Contract/dialog-window/view.js",
+    "extensionPoint": "application-windows",
+    "description": "codbex-contracts - Application Dialog Window",
     "role": "codbex-contracts.Contract.ContractReadOnly,codbex-contracts.Contract.ContractFullAccess"
 }

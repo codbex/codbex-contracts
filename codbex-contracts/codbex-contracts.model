@@ -4,6 +4,7 @@
             {
                 "properties": [
                     {
+                        "auditType": "NONE",
                         "dataAutoIncrement": "true",
                         "dataName": "CONTRACT_ID",
                         "dataNullable": "true",
@@ -18,7 +19,8 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
-                        "calculatedPropertyExpressionCreate": "new NumberGeneratorService().generate(23)",
+                        "auditType": "NONE",
+                        "calculatedPropertyExpressionCreate": "new NumberGeneratorService().generateByType('Contract')",
                         "dataLength": "20",
                         "dataName": "CONTRACT_NUMBER",
                         "dataNullable": "true",
@@ -33,6 +35,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "CONTRACT_STARTDATE",
                         "dataNullable": "true",
                         "dataType": "DATE",
@@ -46,6 +49,7 @@
                         "widgetType": "DATE"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "CONTRACT_ENDDATE",
                         "dataNullable": "true",
                         "dataType": "DATE",
@@ -59,6 +63,7 @@
                         "widgetType": "DATE"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "CONTRACT_COMPANY",
                         "dataNullable": "true",
                         "dataType": "INTEGER",
@@ -78,6 +83,7 @@
                         "relationshipEntityPerspectiveLabel": "Entities"
                     },
                     {
+                        "auditType": "NONE",
                         "dataLength": "500",
                         "dataName": "CONTRACT_DOCUMENT",
                         "dataNullable": "true",
@@ -92,6 +98,7 @@
                         "widgetType": "URL"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "CONTRACT_TYPE",
                         "dataNullable": "true",
                         "dataType": "INTEGER",
@@ -110,6 +117,7 @@
                         "relationshipEntityPerspectiveLabel": "Entities"
                     },
                     {
+                        "auditType": "NONE",
                         "dataLength": "1000",
                         "dataName": "CONTRACT_COMMENT",
                         "dataNullable": "true",
@@ -138,11 +146,13 @@
                 "menuIndex": "100",
                 "menuKey": "contract",
                 "menuLabel": "Contract",
+                "multilingual": "false",
                 "name": "Contract",
-                "navigationPath": "/Home",
+                "perspectiveHeader": "",
                 "perspectiveIcon": "/services/web/resources/unicons/document-info.svg",
                 "perspectiveLabel": "Contract",
                 "perspectiveName": "Contract",
+                "perspectiveNavId": "",
                 "perspectiveOrder": "100",
                 "perspectiveRole": "",
                 "roleRead": "codbex-contracts.Contract.ContractReadOnly",
@@ -154,6 +164,7 @@
             {
                 "properties": [
                     {
+                        "auditType": "NONE",
                         "dataAutoIncrement": "true",
                         "dataName": "CONTRACTTYPE_ID",
                         "dataNullable": "true",
@@ -168,6 +179,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "dataLength": "100",
                         "dataName": "CONTRACTTYPE_NAME",
                         "dataNullable": "true",
@@ -195,11 +207,13 @@
                 "menuIndex": "100",
                 "menuKey": "contracttype",
                 "menuLabel": "ContractType",
+                "multilingual": "false",
                 "name": "ContractType",
-                "navigationPath": "/Home",
+                "perspectiveHeader": "",
                 "perspectiveIcon": "/services/web/resources/unicons/wrench.svg",
                 "perspectiveLabel": "Settings",
                 "perspectiveName": "Settings",
+                "perspectiveNavId": "",
                 "perspectiveOrder": "999",
                 "perspectiveRole": "",
                 "roleRead": "codbex-contracts.Settings.ContractTypeReadOnly",
@@ -211,6 +225,7 @@
             {
                 "properties": [
                     {
+                        "auditType": "NONE",
                         "calculatedPropertyExpressionCreate": "",
                         "calculatedPropertyExpressionUpdate": "",
                         "dataAutoIncrement": "true",
@@ -227,6 +242,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "calculatedPropertyExpressionCreate": "",
                         "calculatedPropertyExpressionUpdate": "",
                         "dataLength": "100",
@@ -243,6 +259,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "calculatedPropertyExpressionCreate": "",
                         "calculatedPropertyExpressionUpdate": "",
                         "dataLength": "50",
@@ -258,6 +275,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "calculatedPropertyExpressionCreate": "",
                         "calculatedPropertyExpressionUpdate": "",
                         "dataLength": "100",
@@ -274,6 +292,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "calculatedPropertyExpressionCreate": "",
                         "calculatedPropertyExpressionUpdate": "",
                         "dataLength": "20",
@@ -289,6 +308,7 @@
                         "widgetType": "TEL"
                     },
                     {
+                        "auditType": "NONE",
                         "calculatedPropertyExpressionCreate": "",
                         "calculatedPropertyExpressionUpdate": "",
                         "dataLength": "200",
@@ -305,6 +325,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "calculatedPropertyExpressionCreate": "",
                         "calculatedPropertyExpressionUpdate": "",
                         "dataLength": "20",
@@ -321,6 +342,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "calculatedPropertyExpressionCreate": "",
                         "calculatedPropertyExpressionUpdate": "",
                         "dataName": "COMPANY_CITY",
@@ -340,6 +362,7 @@
                         "widgetType": "DROPDOWN"
                     },
                     {
+                        "auditType": "NONE",
                         "calculatedPropertyExpressionCreate": "",
                         "calculatedPropertyExpressionUpdate": "",
                         "dataName": "COMPANY_COUNTRY",
@@ -359,6 +382,7 @@
                         "widgetType": "DROPDOWN"
                     },
                     {
+                        "auditType": "NONE",
                         "calculatedPropertyExpressionCreate": "",
                         "calculatedPropertyExpressionUpdate": "",
                         "dataLength": "20",
@@ -374,6 +398,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "calculatedPropertyExpressionCreate": "",
                         "calculatedPropertyExpressionUpdate": "",
                         "dataLength": "34",
@@ -401,11 +426,13 @@
                 "menuIndex": "100",
                 "menuKey": "company",
                 "menuLabel": "Company",
+                "multilingual": "false",
                 "name": "Company",
-                "navigationPath": "/Home",
+                "perspectiveHeader": "",
                 "perspectiveIcon": "/services/web/resources/unicons/university.svg",
                 "perspectiveLabel": "Entities",
                 "perspectiveName": "Companies",
+                "perspectiveNavId": "",
                 "perspectiveOrder": "100",
                 "perspectiveRole": "",
                 "projectionReferencedEntity": "Company",
@@ -417,6 +444,7 @@
             {
                 "properties": [
                     {
+                        "auditType": "NONE",
                         "dataAutoIncrement": "true",
                         "dataName": "COMPANYROLE_ID",
                         "dataNullable": "true",
@@ -431,6 +459,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "dataLength": "20",
                         "dataName": "COMPANYROLE_NAME",
                         "dataNullable": "true",
@@ -444,6 +473,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "COMPANYROLE_COMPANY",
                         "dataNullable": "true",
                         "dataType": "INTEGER",
@@ -473,11 +503,13 @@
                 "menuIndex": "100",
                 "menuKey": "jobrole",
                 "menuLabel": "JobRole",
+                "multilingual": "false",
                 "name": "JobRole",
-                "navigationPath": "/Home",
+                "perspectiveHeader": "",
                 "perspectiveIcon": "/services/web/resources/unicons/user.svg",
                 "perspectiveLabel": "Companies",
                 "perspectiveName": "Companies",
+                "perspectiveNavId": "",
                 "perspectiveOrder": "113",
                 "perspectiveRole": "",
                 "projectionReferencedEntity": "JobRole",
@@ -489,6 +521,7 @@
             {
                 "properties": [
                     {
+                        "auditType": "NONE",
                         "dataAutoIncrement": "true",
                         "dataName": "EMPLOYEECONTRACT_ID",
                         "dataNullable": "true",
@@ -503,7 +536,8 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
-                        "calculatedPropertyExpressionCreate": "new NumberGeneratorService().generate(28)",
+                        "auditType": "NONE",
+                        "calculatedPropertyExpressionCreate": "new NumberGeneratorService().generateByType('Employee Contract')",
                         "dataLength": "20",
                         "dataName": "EMPLOYEECONTRACT_NUMBER",
                         "dataNullable": "true",
@@ -518,6 +552,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "EMPLOYEECONTRACT_EMPLOYEE",
                         "dataNullable": "true",
                         "dataType": "INTEGER",
@@ -537,6 +572,7 @@
                         "relationshipEntityPerspectiveLabel": "Employees"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "EMPLOYEECONTRACT_STARTDATE",
                         "dataNullable": "true",
                         "dataType": "DATE",
@@ -550,6 +586,7 @@
                         "widgetType": "DATE"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "EMPLOYEECONTRACT_ENDDATE",
                         "dataNullable": "true",
                         "dataType": "DATE",
@@ -563,6 +600,7 @@
                         "widgetType": "DATE"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "EMPLOYEECONTRACT_COMPANY",
                         "dataNullable": "true",
                         "dataType": "INTEGER",
@@ -582,6 +620,7 @@
                         "relationshipEntityPerspectiveLabel": "Entities"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "EMPLOYEECONTRACT_JOBROLE",
                         "dataNullable": "true",
                         "dataType": "INTEGER",
@@ -601,6 +640,7 @@
                         "relationshipEntityPerspectiveLabel": "Companies"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "EMPLOYEECONTRACT_ANNUALPAIDLEAVE",
                         "dataNullable": "true",
                         "dataType": "INTEGER",
@@ -614,6 +654,7 @@
                         "widgetType": "NUMBER"
                     },
                     {
+                        "auditType": "NONE",
                         "dataLength": "500",
                         "dataName": "EMPLOYEECONTRACT_DOCUMENT",
                         "dataNullable": "true",
@@ -628,6 +669,7 @@
                         "widgetType": "URL"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "EMPLOYEECONTRACT_TYPE",
                         "dataNullable": "true",
                         "dataType": "INTEGER",
@@ -647,6 +689,7 @@
                         "relationshipEntityPerspectiveLabel": "Entities"
                     },
                     {
+                        "auditType": "NONE",
                         "dataLength": "1000",
                         "dataName": "EMPLOYEECONTRACT_COMMENT",
                         "dataNullable": "true",
@@ -673,11 +716,13 @@
                 "menuIndex": "100",
                 "menuKey": "employeecontract",
                 "menuLabel": "EmployeeContract",
+                "multilingual": "false",
                 "name": "EmployeeContract",
-                "navigationPath": "/Home",
+                "perspectiveHeader": "",
                 "perspectiveIcon": "/services/web/resources/unicons/book-open.svg",
                 "perspectiveLabel": "EmployeeContracts",
                 "perspectiveName": "EmployeeContracts",
+                "perspectiveNavId": "",
                 "perspectiveOrder": "103",
                 "perspectiveRole": "",
                 "roleRead": "codbex-contracts.EmployeeContracts.EmployeeContractReadOnly",
@@ -689,6 +734,7 @@
             {
                 "properties": [
                     {
+                        "auditType": "NONE",
                         "dataAutoIncrement": "true",
                         "dataName": "EMPLOYEECONTRACTITEM_ID",
                         "dataNullable": "true",
@@ -703,6 +749,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "dataLength": "100",
                         "dataName": "EMPLOYEECONTRACTITEM_NAME",
                         "dataNullable": "true",
@@ -717,6 +764,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "dataLength": "500",
                         "dataName": "EMPLOYEECONTRACTITEM_DOCUMENT",
                         "dataNullable": "true",
@@ -730,6 +778,7 @@
                         "widgetType": "URL"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "EMPLOYEECONTRACTITEM_EMPLOYEECONTRACT",
                         "dataNullable": "true",
                         "dataType": "INTEGER",
@@ -760,11 +809,13 @@
                 "menuIndex": "100",
                 "menuKey": "employeecontractitem",
                 "menuLabel": "EmployeeContractItem",
+                "multilingual": "false",
                 "name": "EmployeeContractItem",
-                "navigationPath": "/Home",
+                "perspectiveHeader": "",
                 "perspectiveIcon": "/services/web/resources/unicons/book-open.svg",
                 "perspectiveLabel": "EmployeeContracts",
                 "perspectiveName": "EmployeeContracts",
+                "perspectiveNavId": "",
                 "perspectiveOrder": "103",
                 "perspectiveRole": "",
                 "roleRead": "codbex-contracts.EmployeeContracts.EmployeeContractItemReadOnly",
@@ -776,6 +827,7 @@
             {
                 "properties": [
                     {
+                        "auditType": "NONE",
                         "dataAutoIncrement": "true",
                         "dataName": "EMPLOYEE_ID",
                         "dataNullable": "true",
@@ -790,6 +842,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "dataLength": "50",
                         "dataName": "EMPLOYEE_FIRSTNAME",
                         "dataNullable": "true",
@@ -806,6 +859,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "dataLength": "50",
                         "dataName": "EMPLOYEE_MIDDLENAME",
                         "dataNullable": "true",
@@ -821,6 +875,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "dataLength": "50",
                         "dataName": "EMPLOYEE_LASTNAME",
                         "dataNullable": "true",
@@ -837,6 +892,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "calculatedPropertyExpressionCreate": "entity[\"FirstName\"] + \" \" + entity[\"LastName\"]",
                         "dataLength": "70",
                         "dataName": "EMPLOYEE_NAME",
@@ -852,6 +908,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "EMPLOYEE_BIRTHDATE",
                         "dataNullable": "true",
                         "dataType": "DATE",
@@ -865,6 +922,7 @@
                         "widgetType": "DATE"
                     },
                     {
+                        "auditType": "NONE",
                         "dataLength": "10",
                         "dataName": "EMPLOYEE_PERSONALNUMBER",
                         "dataNullable": "true",
@@ -879,6 +937,7 @@
                         "widgetType": "TEXTBOX"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "EMPLOYEE_GENDER",
                         "dataNullable": "true",
                         "dataType": "INTEGER",
@@ -897,6 +956,7 @@
                         "widgetType": "DROPDOWN"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "EMPLOYEE_NATIONALITY",
                         "dataNullable": "true",
                         "dataType": "INTEGER",
@@ -915,6 +975,7 @@
                         "widgetType": "DROPDOWN"
                     },
                     {
+                        "auditType": "NONE",
                         "dataName": "EMPLOYEE_MARTIALSTATUS",
                         "dataNullable": "true",
                         "dataType": "INTEGER",
@@ -933,6 +994,7 @@
                         "widgetType": "DROPDOWN"
                     },
                     {
+                        "auditType": "NONE",
                         "dataLength": "50",
                         "dataName": "EMPLOYEE_IBAN",
                         "dataNullable": "true",
@@ -959,11 +1021,13 @@
                 "menuIndex": "100",
                 "menuKey": "employee",
                 "menuLabel": "Employee",
+                "multilingual": "false",
                 "name": "Employee",
-                "navigationPath": "/Home",
+                "perspectiveHeader": "",
                 "perspectiveIcon": "/services/web/resources/unicons/user.svg",
                 "perspectiveLabel": "Employees",
                 "perspectiveName": "Employees",
+                "perspectiveNavId": "",
                 "perspectiveOrder": "100",
                 "perspectiveRole": "",
                 "projectionReferencedEntity": "Employee",
@@ -978,22 +1042,19 @@
                 "name": "Contract",
                 "label": "Contract",
                 "icon": "/services/web/resources/unicons/document-info.svg",
-                "order": "100",
-                "role": {}
+                "order": "100"
             },
             {
                 "name": "Settings",
                 "label": "Settings",
                 "icon": "/services/web/resources/unicons/wrench.svg",
-                "order": "999",
-                "role": {}
+                "order": "999"
             },
             {
                 "name": "EmployeeContracts",
                 "label": "EmployeeContracts",
                 "icon": "/services/web/resources/unicons/book-open.svg",
-                "order": "103",
-                "role": {}
+                "order": "103"
             }
         ],
         "navigations": []

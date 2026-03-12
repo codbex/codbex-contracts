@@ -4,14 +4,14 @@
  * Do not modify the content as it may be re-generated again.
  */
 const viewData = {
-    id: "ContractType-details",
-    label: "ContractType",
-    link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/Settings/ContractType/dialog-window/index.html",
-    perspectiveName: "Settings"
+    id: 'ContractType-details',
+    label: 'ContractType',
+    translation: {
+        key: 'codbex-contracts:codbex-contracts-model.t.CONTRACTTYPE',
+    },
+    path: '/services/web/codbex-contracts/gen/codbex-contracts/ui/Settings/ContractType/dialog-window/index.html',
+    perspectiveName: 'Settings'
 };
-
 if (typeof exports !== 'undefined') {
-    exports.getDialogWindow = function () {
-        return viewData;
-    }
+    exports.getView = () => viewData;
 }

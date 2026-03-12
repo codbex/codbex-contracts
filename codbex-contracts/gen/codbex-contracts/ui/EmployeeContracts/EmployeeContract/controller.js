@@ -1,31 +1,42 @@
-angular.module('page', ["ideUI", "ideView", "entityApi"])
-	.config(["messageHubProvider", function (messageHubProvider) {
-		messageHubProvider.eventIdPrefix = 'codbex-contracts.EmployeeContracts.EmployeeContract';
+angular.module('page', ['blimpKit', 'platformView', 'platformLocale', 'EntityService'])
+	.config(['EntityServiceProvider', (EntityServiceProvider) => {
+		EntityServiceProvider.baseUrl = '/services/ts/codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractService.ts';
 	}])
-	.config(["entityApiProvider", function (entityApiProvider) {
-		entityApiProvider.baseUrl = "/services/ts/codbex-contracts/gen/codbex-contracts/api/EmployeeContracts/EmployeeContractService.ts";
-	}])
-	.controller('PageController', ['$scope', '$http', 'messageHub', 'entityApi', 'Extensions', function ($scope, $http, messageHub, entityApi, Extensions) {
+	.controller('PageController', ($scope, $http, EntityService, Extensions, LocaleService, ButtonStates) => {
+		const Dialogs = new DialogHub();
+		let translated = {
+			yes: 'Yes',
+			no: 'No',
+			deleteConfirm: 'Are you sure you want to delete EmployeeContract? This action cannot be undone.',
+			deleteTitle: 'Delete EmployeeContract?'
+		};
 
+		LocaleService.onInit(() => {
+			translated.yes = LocaleService.t('codbex-contracts:codbex-contracts-model.defaults.yes');
+			translated.no = LocaleService.t('codbex-contracts:codbex-contracts-model.defaults.no');
+			translated.deleteTitle = LocaleService.t('codbex-contracts:codbex-contracts-model.defaults.deleteTitle', { name: '$t(codbex-contracts:codbex-contracts-model.t.EMPLOYEECONTRACT)' });
+			translated.deleteConfirm = LocaleService.t('codbex-contracts:codbex-contracts-model.messages.deleteConfirm', { name: '$t(codbex-contracts:codbex-contracts-model.t.EMPLOYEECONTRACT)' });
+		});
 		$scope.dataPage = 1;
 		$scope.dataCount = 0;
 		$scope.dataOffset = 0;
 		$scope.dataLimit = 10;
-		$scope.action = "select";
+		$scope.action = 'select';
 
 		//-----------------Custom Actions-------------------//
-		Extensions.get('dialogWindow', 'codbex-contracts-custom-action').then(function (response) {
-			$scope.pageActions = response.filter(e => e.perspective === "EmployeeContracts" && e.view === "EmployeeContract" && (e.type === "page" || e.type === undefined));
+		Extensions.getWindows(['codbex-contracts-custom-action']).then((response) => {
+			$scope.pageActions = response.data.filter(e => e.perspective === 'EmployeeContracts' && e.view === 'EmployeeContract' && (e.type === 'page' || e.type === undefined));
 		});
 
-		$scope.triggerPageAction = function (action) {
-			messageHub.showDialogWindow(
-				action.id,
-				{},
-				null,
-				true,
-				action
-			);
+		$scope.triggerPageAction = (action) => {
+			Dialogs.showWindow({
+				hasHeader: true,
+        		title: LocaleService.t(action.translation.key, action.translation.options, action.label),
+				path: action.path,
+				maxWidth: action.maxWidth,
+				maxHeight: action.maxHeight,
+				closeButton: true
+			});
 		};
 		//-----------------Custom Actions-------------------//
 
@@ -42,32 +53,29 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		}
 
 		//-----------------Events-------------------//
-		messageHub.onDidReceiveMessage("clearDetails", function (msg) {
-			$scope.$apply(function () {
+		Dialogs.addMessageListener({ topic: 'codbex-contracts.EmployeeContracts.EmployeeContract.clearDetails', handler: () => {
+			$scope.$evalAsync(() => {
 				$scope.selectedEntity = null;
-				$scope.action = "select";
+				$scope.action = 'select';
 			});
-		});
-
-		messageHub.onDidReceiveMessage("entityCreated", function (msg) {
+		}});
+		Dialogs.addMessageListener({ topic: 'codbex-contracts.EmployeeContracts.EmployeeContract.entityCreated', handler: () => {
 			refreshData();
 			$scope.loadPage($scope.dataPage, $scope.filter);
-		});
-
-		messageHub.onDidReceiveMessage("entityUpdated", function (msg) {
+		}});
+		Dialogs.addMessageListener({ topic: 'codbex-contracts.EmployeeContracts.EmployeeContract.entityUpdated', handler: () => {
 			refreshData();
 			$scope.loadPage($scope.dataPage, $scope.filter);
-		});
-
-		messageHub.onDidReceiveMessage("entitySearch", function (msg) {
+		}});
+		Dialogs.addMessageListener({ topic: 'codbex-contracts.EmployeeContracts.EmployeeContract.entitySearch', handler: (data) => {
 			resetPagination();
-			$scope.filter = msg.data.filter;
-			$scope.filterEntity = msg.data.entity;
+			$scope.filter = data.filter;
+			$scope.filterEntity = data.entity;
 			$scope.loadPage($scope.dataPage, $scope.filter);
-		});
+		}});
 		//-----------------Events-------------------//
 
-		$scope.loadPage = function (pageNumber, filter) {
+		$scope.loadPage = (pageNumber, filter) => {
 			if (!filter && $scope.filter) {
 				filter = $scope.filter;
 			}
@@ -75,13 +83,9 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 				filter = {};
 			}
 			$scope.selectedEntity = null;
-			entityApi.count(filter).then(function (response) {
-				if (response.status != 200) {
-					messageHub.showAlertError("EmployeeContract", `Unable to count EmployeeContract: '${response.message}'`);
-					return;
-				}
-				if (response.data) {
-					$scope.dataCount = response.data;
+			EntityService.count(filter).then((resp) => {
+				if (resp.data) {
+					$scope.dataCount = resp.data.count;
 				}
 				$scope.dataPages = Math.ceil($scope.dataCount / $scope.dataLimit);
 				filter.$offset = ($scope.dataPage - 1) * $scope.dataLimit;
@@ -91,16 +95,11 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 					filter.$limit = $scope.dataPage * $scope.dataLimit;
 				}
 
-				entityApi.search(filter).then(function (response) {
-					if (response.status != 200) {
-						messageHub.showAlertError("EmployeeContract", `Unable to list/filter EmployeeContract: '${response.message}'`);
-						return;
-					}
+				EntityService.search(filter).then((response) => {
 					if ($scope.data == null || $scope.dataReset) {
 						$scope.data = [];
 						$scope.dataReset = false;
 					}
-
 					response.data.forEach(e => {
 						if (e.StartDate) {
 							e.StartDate = new Date(e.StartDate);
@@ -112,84 +111,106 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 
 					$scope.data = $scope.data.concat(response.data);
 					$scope.dataPage++;
+				}, (error) => {
+					const message = error.data ? error.data.message : '';
+					Dialogs.showAlert({
+						title: LocaleService.t('codbex-contracts:codbex-contracts-model.t.EMPLOYEECONTRACT'),
+						message: LocaleService.t('codbex-contracts:codbex-contracts-model.messages.error.unableToLF', { name: '$t(codbex-contracts:codbex-contracts-model.t.EMPLOYEECONTRACT)', message: message }),
+						type: AlertTypes.Error
+					});
+					console.error('EntityService:', error);
 				});
+			}, (error) => {
+				const message = error.data ? error.data.message : '';
+				Dialogs.showAlert({
+					title: LocaleService.t('codbex-contracts:codbex-contracts-model.t.EMPLOYEECONTRACT'),
+					message: LocaleService.t('codbex-contracts:codbex-contracts-model.messages.error.unableToCount', { name: '$t(codbex-contracts:codbex-contracts-model.t.EMPLOYEECONTRACT)', message: message }),
+					type: AlertTypes.Error
+				});
+				console.error('EntityService:', error);
 			});
 		};
 		$scope.loadPage($scope.dataPage, $scope.filter);
 
-		$scope.selectEntity = function (entity) {
+		$scope.selectEntity = (entity) => {
 			$scope.selectedEntity = entity;
-			messageHub.postMessage("entitySelected", {
+			Dialogs.postMessage({ topic: 'codbex-contracts.EmployeeContracts.EmployeeContract.entitySelected', data: {
 				entity: entity,
 				selectedMainEntityId: entity.Id,
 				optionsEmployee: $scope.optionsEmployee,
 				optionsCompany: $scope.optionsCompany,
 				optionsJobRole: $scope.optionsJobRole,
 				optionsType: $scope.optionsType,
-			});
+			}});
 		};
 
-		$scope.createEntity = function () {
+		$scope.createEntity = () => {
 			$scope.selectedEntity = null;
-			$scope.action = "create";
+			$scope.action = 'create';
 
-			messageHub.postMessage("createEntity", {
+			Dialogs.postMessage({ topic: 'codbex-contracts.EmployeeContracts.EmployeeContract.createEntity', data: {
 				entity: {},
 				optionsEmployee: $scope.optionsEmployee,
 				optionsCompany: $scope.optionsCompany,
 				optionsJobRole: $scope.optionsJobRole,
 				optionsType: $scope.optionsType,
-			});
+			}});
 		};
 
-		$scope.updateEntity = function () {
-			$scope.action = "update";
-			messageHub.postMessage("updateEntity", {
+		$scope.updateEntity = () => {
+			$scope.action = 'update';
+			Dialogs.postMessage({ topic: 'codbex-contracts.EmployeeContracts.EmployeeContract.updateEntity', data: {
 				entity: $scope.selectedEntity,
 				optionsEmployee: $scope.optionsEmployee,
 				optionsCompany: $scope.optionsCompany,
 				optionsJobRole: $scope.optionsJobRole,
 				optionsType: $scope.optionsType,
-			});
+			}});
 		};
 
-		$scope.deleteEntity = function () {
+		$scope.deleteEntity = () => {
 			let id = $scope.selectedEntity.Id;
-			messageHub.showDialogAsync(
-				'Delete EmployeeContract?',
-				`Are you sure you want to delete EmployeeContract? This action cannot be undone.`,
-				[{
-					id: "delete-btn-yes",
-					type: "emphasized",
-					label: "Yes",
-				},
-				{
-					id: "delete-btn-no",
-					type: "normal",
-					label: "No",
+			Dialogs.showDialog({
+				title: translated.deleteTitle,
+				message: translated.deleteConfirm,
+				buttons: [{
+					id: 'delete-btn-yes',
+					state: ButtonStates.Emphasized,
+					label: translated.yes,
+				}, {
+					id: 'delete-btn-no',
+					label: translated.no,
 				}],
-			).then(function (msg) {
-				if (msg.data === "delete-btn-yes") {
-					entityApi.delete(id).then(function (response) {
-						if (response.status != 204) {
-							messageHub.showAlertError("EmployeeContract", `Unable to delete EmployeeContract: '${response.message}'`);
-							return;
-						}
+				closeButton: false
+			}).then((buttonId) => {
+				if (buttonId === 'delete-btn-yes') {
+					EntityService.delete(id).then(() => {
 						refreshData();
 						$scope.loadPage($scope.dataPage, $scope.filter);
-						messageHub.postMessage("clearDetails");
+						Dialogs.triggerEvent('codbex-contracts.EmployeeContracts.EmployeeContract.clearDetails');
+					}, (error) => {
+						const message = error.data ? error.data.message : '';
+						Dialogs.showAlert({
+							title: LocaleService.t('codbex-contracts:codbex-contracts-model.t.EMPLOYEECONTRACT'),
+							message: LocaleService.t('codbex-contracts:codbex-contracts-model.messages.error.unableToDelete', { name: '$t(codbex-contracts:codbex-contracts-model.t.EMPLOYEECONTRACT)', message: message }),
+							type: AlertTypes.Error
+						});
+						console.error('EntityService:', error);
 					});
 				}
 			});
 		};
 
-		$scope.openFilter = function (entity) {
-			messageHub.showDialogWindow("EmployeeContract-filter", {
-				entity: $scope.filterEntity,
-				optionsEmployee: $scope.optionsEmployee,
-				optionsCompany: $scope.optionsCompany,
-				optionsJobRole: $scope.optionsJobRole,
-				optionsType: $scope.optionsType,
+		$scope.openFilter = () => {
+			Dialogs.showWindow({
+				id: 'EmployeeContract-filter',
+				params: {
+					entity: $scope.filterEntity,
+					optionsEmployee: $scope.optionsEmployee,
+					optionsCompany: $scope.optionsCompany,
+					optionsJobRole: $scope.optionsJobRole,
+					optionsType: $scope.optionsType,
+				},
 			});
 		};
 
@@ -200,43 +221,67 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 		$scope.optionsType = [];
 
 
-		$http.get("/services/ts/codbex-employees/gen/codbex-employees/api/Employees/EmployeeService.ts").then(function (response) {
-			$scope.optionsEmployee = response.data.map(e => {
-				return {
-					value: e.Id,
-					text: e.Name
-				}
+		$http.get('/services/ts/codbex-employees/gen/codbex-employees/api/Employees/EmployeeService.ts').then((response) => {
+			$scope.optionsEmployee = response.data.map(e => ({
+				value: e.Id,
+				text: e.Name
+			}));
+		}, (error) => {
+			console.error(error);
+			const message = error.data ? error.data.message : '';
+			Dialogs.showAlert({
+				title: 'Employee',
+				message: LocaleService.t('codbex-contracts:codbex-contracts-model.messages.error.unableToLoad', { message: message }),
+				type: AlertTypes.Error
 			});
 		});
 
-		$http.get("/services/ts/codbex-companies/gen/codbex-companies/api/Companies/CompanyService.ts").then(function (response) {
-			$scope.optionsCompany = response.data.map(e => {
-				return {
-					value: e.Id,
-					text: e.Name
-				}
+		$http.get('/services/ts/codbex-companies/gen/codbex-companies/api/Companies/CompanyService.ts').then((response) => {
+			$scope.optionsCompany = response.data.map(e => ({
+				value: e.Id,
+				text: e.Name
+			}));
+		}, (error) => {
+			console.error(error);
+			const message = error.data ? error.data.message : '';
+			Dialogs.showAlert({
+				title: 'Company',
+				message: LocaleService.t('codbex-contracts:codbex-contracts-model.messages.error.unableToLoad', { message: message }),
+				type: AlertTypes.Error
 			});
 		});
 
-		$http.get("/services/ts/codbex-companies/gen/codbex-companies/api/Companies/JobRoleService.ts").then(function (response) {
-			$scope.optionsJobRole = response.data.map(e => {
-				return {
-					value: e.Id,
-					text: e.Name
-				}
+		$http.get('/services/ts/codbex-companies/gen/codbex-companies/api/Companies/JobRoleService.ts').then((response) => {
+			$scope.optionsJobRole = response.data.map(e => ({
+				value: e.Id,
+				text: e.Name
+			}));
+		}, (error) => {
+			console.error(error);
+			const message = error.data ? error.data.message : '';
+			Dialogs.showAlert({
+				title: 'JobRole',
+				message: LocaleService.t('codbex-contracts:codbex-contracts-model.messages.error.unableToLoad', { message: message }),
+				type: AlertTypes.Error
 			});
 		});
 
-		$http.get("/services/ts/codbex-contracts/gen/codbex-contracts/api/Settings/ContractTypeService.ts").then(function (response) {
-			$scope.optionsType = response.data.map(e => {
-				return {
-					value: e.Id,
-					text: e.Name
-				}
+		$http.get('/services/ts/codbex-contracts/gen/codbex-contracts/api/Settings/ContractTypeService.ts').then((response) => {
+			$scope.optionsType = response.data.map(e => ({
+				value: e.Id,
+				text: e.Name
+			}));
+		}, (error) => {
+			console.error(error);
+			const message = error.data ? error.data.message : '';
+			Dialogs.showAlert({
+				title: 'Type',
+				message: LocaleService.t('codbex-contracts:codbex-contracts-model.messages.error.unableToLoad', { message: message }),
+				type: AlertTypes.Error
 			});
 		});
 
-		$scope.optionsEmployeeValue = function (optionKey) {
+		$scope.optionsEmployeeValue = (optionKey) => {
 			for (let i = 0; i < $scope.optionsEmployee.length; i++) {
 				if ($scope.optionsEmployee[i].value === optionKey) {
 					return $scope.optionsEmployee[i].text;
@@ -244,7 +289,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			}
 			return null;
 		};
-		$scope.optionsCompanyValue = function (optionKey) {
+		$scope.optionsCompanyValue = (optionKey) => {
 			for (let i = 0; i < $scope.optionsCompany.length; i++) {
 				if ($scope.optionsCompany[i].value === optionKey) {
 					return $scope.optionsCompany[i].text;
@@ -252,7 +297,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			}
 			return null;
 		};
-		$scope.optionsJobRoleValue = function (optionKey) {
+		$scope.optionsJobRoleValue = (optionKey) => {
 			for (let i = 0; i < $scope.optionsJobRole.length; i++) {
 				if ($scope.optionsJobRole[i].value === optionKey) {
 					return $scope.optionsJobRole[i].text;
@@ -260,7 +305,7 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			}
 			return null;
 		};
-		$scope.optionsTypeValue = function (optionKey) {
+		$scope.optionsTypeValue = (optionKey) => {
 			for (let i = 0; i < $scope.optionsType.length; i++) {
 				if ($scope.optionsType[i].value === optionKey) {
 					return $scope.optionsType[i].text;
@@ -269,5 +314,4 @@ angular.module('page', ["ideUI", "ideView", "entityApi"])
 			return null;
 		};
 		//----------------Dropdowns-----------------//
-
-	}]);
+	});
