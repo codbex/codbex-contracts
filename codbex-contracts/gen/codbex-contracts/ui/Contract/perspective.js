@@ -5,14 +5,14 @@
  */
 const perspectiveData = {
 	id: 'Contract',
-	name: 'Contract',
-	link: '/services/web/codbex-contracts/gen/codbex-contracts/ui/Contract/index.html',
-	order: '100',
+	label: 'Contract',
+	translation: {
+        key: 'codbex-contracts:codbex-contracts-model.t.CONTRACT',
+    },
+	path: '/services/web/codbex-contracts/gen/codbex-contracts/ui/Contract/index.html',
+	order: 100,
 	icon: '/services/web/resources/unicons/document-info.svg'
 };
-
 if (typeof exports !== 'undefined') {
-	exports.getPerspective = function () {
-		return perspectiveData;
-	}
+	exports.getPerspective = () => perspectiveData;
 }

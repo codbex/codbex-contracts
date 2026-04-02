@@ -6,15 +6,15 @@
 const viewData = {
     id: "EmployeeContract-details",
     label: "EmployeeContract",
-    link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/EmployeeContracts/EmployeeContract/dialog-window/index.html",
+    translation: {
+        key: 'codbex-contracts:codbex-contracts-model.t.EMPLOYEECONTRACT',
+    },
+    path: "/services/web/codbex-contracts/gen/codbex-contracts/ui/EmployeeContracts/EmployeeContract/dialog-window/index.html",
     perspectiveName: "EmployeeContracts",
     roles: [
         "codbex-contracts.EmployeeContracts.EmployeeContractReadOnly",
     ]
 };
-
 if (typeof exports !== 'undefined') {
-    exports.getDialogWindow = function () {
-        return viewData;
-    }
+    exports.getView = () => viewData;
 }

@@ -1,7 +1,7 @@
-import { query } from "sdk/db";
-import { producer } from "sdk/messaging";
-import { extensions } from "sdk/extensions";
-import { dao as daoApi } from "sdk/db";
+import { sql, query } from "@aerokit/sdk/db";
+import { producer } from "@aerokit/sdk/messaging";
+import { extensions } from "@aerokit/sdk/extensions";
+import { dao as daoApi } from "@aerokit/sdk/db";
 
 export interface EmployeeContractItemEntity {
     readonly Id: number;
@@ -67,12 +67,13 @@ export interface EmployeeContractItemEntityOptions {
     },
     $select?: (keyof EmployeeContractItemEntity)[],
     $sort?: string | (keyof EmployeeContractItemEntity)[],
-    $order?: 'asc' | 'desc',
+    $order?: 'ASC' | 'DESC',
     $offset?: number,
     $limit?: number,
+    $language?: string
 }
 
-interface EmployeeContractItemEntityEvent {
+export interface EmployeeContractItemEntityEvent {
     readonly operation: 'create' | 'update' | 'delete';
     readonly table: string;
     readonly entity: Partial<EmployeeContractItemEntity>;
@@ -83,7 +84,7 @@ interface EmployeeContractItemEntityEvent {
     }
 }
 
-interface EmployeeContractItemUpdateEntityEvent extends EmployeeContractItemEntityEvent {
+export interface EmployeeContractItemUpdateEntityEvent extends EmployeeContractItemEntityEvent {
     readonly previousEntity: EmployeeContractItemEntity;
 }
 
@@ -120,14 +121,15 @@ export class EmployeeContractItemRepository {
     private readonly dao;
 
     constructor(dataSource = "DefaultDB") {
-        this.dao = daoApi.create(EmployeeContractItemRepository.DEFINITION, null, dataSource);
+        this.dao = daoApi.create(EmployeeContractItemRepository.DEFINITION, undefined, dataSource);
     }
 
-    public findAll(options?: EmployeeContractItemEntityOptions): EmployeeContractItemEntity[] {
-        return this.dao.list(options);
+    public findAll(options: EmployeeContractItemEntityOptions = {}): EmployeeContractItemEntity[] {
+        let list = this.dao.list(options);
+        return list;
     }
 
-    public findById(id: number): EmployeeContractItemEntity | undefined {
+    public findById(id: number, options: EmployeeContractItemEntityOptions = {}): EmployeeContractItemEntity | undefined {
         const entity = this.dao.find(id);
         return entity ?? undefined;
     }

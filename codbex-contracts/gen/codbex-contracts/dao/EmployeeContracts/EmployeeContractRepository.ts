@@ -1,7 +1,7 @@
-import { query } from "sdk/db";
-import { producer } from "sdk/messaging";
-import { extensions } from "sdk/extensions";
-import { dao as daoApi } from "sdk/db";
+import { sql, query } from "@aerokit/sdk/db";
+import { producer } from "@aerokit/sdk/messaging";
+import { extensions } from "@aerokit/sdk/extensions";
+import { dao as daoApi } from "@aerokit/sdk/db";
 import { EntityUtils } from "../utils/EntityUtils";
 // custom imports
 import { NumberGeneratorService } from "/codbex-number-generator/service/generator";
@@ -132,12 +132,13 @@ export interface EmployeeContractEntityOptions {
     },
     $select?: (keyof EmployeeContractEntity)[],
     $sort?: string | (keyof EmployeeContractEntity)[],
-    $order?: 'asc' | 'desc',
+    $order?: 'ASC' | 'DESC',
     $offset?: number,
     $limit?: number,
+    $language?: string
 }
 
-interface EmployeeContractEntityEvent {
+export interface EmployeeContractEntityEvent {
     readonly operation: 'create' | 'update' | 'delete';
     readonly table: string;
     readonly entity: Partial<EmployeeContractEntity>;
@@ -148,7 +149,7 @@ interface EmployeeContractEntityEvent {
     }
 }
 
-interface EmployeeContractUpdateEntityEvent extends EmployeeContractEntityEvent {
+export interface EmployeeContractUpdateEntityEvent extends EmployeeContractEntityEvent {
     readonly previousEntity: EmployeeContractEntity;
 }
 
@@ -220,18 +221,19 @@ export class EmployeeContractRepository {
     private readonly dao;
 
     constructor(dataSource = "DefaultDB") {
-        this.dao = daoApi.create(EmployeeContractRepository.DEFINITION, null, dataSource);
+        this.dao = daoApi.create(EmployeeContractRepository.DEFINITION, undefined, dataSource);
     }
 
-    public findAll(options?: EmployeeContractEntityOptions): EmployeeContractEntity[] {
-        return this.dao.list(options).map((e: EmployeeContractEntity) => {
+    public findAll(options: EmployeeContractEntityOptions = {}): EmployeeContractEntity[] {
+        let list = this.dao.list(options).map((e: EmployeeContractEntity) => {
             EntityUtils.setDate(e, "StartDate");
             EntityUtils.setDate(e, "EndDate");
             return e;
         });
+        return list;
     }
 
-    public findById(id: number): EmployeeContractEntity | undefined {
+    public findById(id: number, options: EmployeeContractEntityOptions = {}): EmployeeContractEntity | undefined {
         const entity = this.dao.find(id);
         EntityUtils.setDate(entity, "StartDate");
         EntityUtils.setDate(entity, "EndDate");
@@ -242,7 +244,7 @@ export class EmployeeContractRepository {
         EntityUtils.setLocalDate(entity, "StartDate");
         EntityUtils.setLocalDate(entity, "EndDate");
         // @ts-ignore
-        (entity as EmployeeContractEntity).Number = new NumberGeneratorService().generate(28);
+        (entity as EmployeeContractEntity).Number = new NumberGeneratorService().generateByType('Employee Contract');
         const id = this.dao.insert(entity);
         this.triggerEvent({
             operation: "create",

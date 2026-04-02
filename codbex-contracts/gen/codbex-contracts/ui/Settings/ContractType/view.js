@@ -4,16 +4,17 @@
  * Do not modify the content as it may be re-generated again.
  */
 const viewData = {
-    id: "ContractType",
-    label: "ContractType",
-    factory: "frame",
-    region: "center",
-    link: "/services/web/codbex-contracts/gen/codbex-contracts/ui/Settings/ContractType/index.html",
-    perspectiveName: "Settings"
+    id: 'ContractType',
+    label: 'ContractType',
+    translation: {
+        key: 'codbex-contracts:codbex-contracts-model.t.CONTRACTTYPE',
+    },
+    region: 'center',
+    lazyLoad: true,
+	autoFocusTab: false,
+    path: '/services/web/codbex-contracts/gen/codbex-contracts/ui/Settings/ContractType/index.html',
+    perspectiveName: 'Settings'
 };
-
 if (typeof exports !== 'undefined') {
-    exports.getView = function () {
-        return viewData;
-    }
+	exports.getView = () => viewData;
 }
